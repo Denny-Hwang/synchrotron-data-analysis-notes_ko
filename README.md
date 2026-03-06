@@ -20,6 +20,7 @@
 | `06_data_structures/` | HDF5 스키마, EDA 노트북, 샘플 데이터 링크 |
 | `07_data_pipeline/` | 엔드투엔드 파이프라인: 수집 → 스트리밍 → 처리 → 분석 |
 | `08_references/` | 참고문헌, 용어집, 유용한 링크 |
+| `eberlight-explorer/` | Streamlit 기반 인터랙티브 연구 탐색기 웹 앱 |
 
 ## 빠른 시작
 

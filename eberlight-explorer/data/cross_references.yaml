@@ -1,0 +1,54 @@
+modality_method:
+  tomography: [image_segmentation, denoising, reconstruction]
+  xrf_microscopy: [image_segmentation, denoising, autonomous_experiment]
+  ptychography: [reconstruction, multimodal_integration]
+  crystallography: [image_segmentation]
+  spectroscopy: [multimodal_integration]
+  scattering: []
+
+method_paper:
+  tomogan: [review_tomogan_2020]
+  roi_finder: [review_roi_finder_2022]
+  xrf_gmm: [review_xrf_gmm_2013]
+  ptychonet: [review_ptychonet_2019]
+  deep_residual_xrf: [review_deep_residual_xrf_2023]
+  ai_nerd: [review_ai_nerd_2024]
+  aiedge_ptycho: [review_aiedge_ptycho_2023, review_ai_edge_ptychography_2023]
+  fullstack_tomo: [review_fullstack_dl_tomo_2023, review_fullstack_tomo_2023]
+  realtime_hpc: [review_realtime_uct_hpc_2020]
+  alphafold: [review_alphafold_2021]
+
+tool_pipeline_stage:
+  bluesky_epics: acquisition
+  tomocupy: processing
+  tomopy: processing
+  maps_software: processing
+  roi_finder: analysis
+  mlexchange: analysis
+
+pipeline_stages:
+  - id: acquisition
+    name: "수집"
+    icon: "📡"
+    file: "07_data_pipeline/acquisition.md"
+    tools: [bluesky_epics]
+  - id: streaming
+    name: "스트리밍"
+    icon: "🌊"
+    file: "07_data_pipeline/streaming.md"
+    tools: []
+  - id: processing
+    name: "처리"
+    icon: "⚙️"
+    file: "07_data_pipeline/processing.md"
+    tools: [tomocupy, tomopy, maps_software]
+  - id: analysis
+    name: "분석"
+    icon: "🧠"
+    file: "07_data_pipeline/analysis.md"
+    tools: [roi_finder, mlexchange]
+  - id: storage
+    name: "저장"
+    icon: "💾"
+    file: "07_data_pipeline/storage.md"
+    tools: []
