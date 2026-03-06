@@ -1,0 +1,100 @@
+sections:
+  - id: "01_program_overview"
+    title: "프로그램 개요"
+    icon: "🏠"
+    description: "eBERlight 프로그램 미션, APS 시설, 빔라인, 파트너, 연구 분야"
+    files:
+      - path: "01_program_overview/README.md"
+        title: "미션 및 개요"
+        level: L1
+        tags: [overview, mission, BER, DOE]
+      - path: "01_program_overview/aps_facility.md"
+        title: "APS 시설"
+        level: L2
+        tags: [APS, facility, APS-U, upgrade]
+      - path: "01_program_overview/beamlines.md"
+        title: "빔라인"
+        level: L2
+        tags: [beamline, facility]
+      - path: "01_program_overview/partner_facilities.md"
+        title: "파트너 시설"
+        level: L2
+        tags: [NSLS-II, SSRL, partners]
+      - path: "01_program_overview/research_domains.md"
+        title: "연구 분야"
+        level: L2
+        tags: [biology, environment, soil, plant, microbiome]
+
+  - id: "02_xray_modalities"
+    title: "X선 모달리티"
+    icon: "🔬"
+    description: "APS 빔라인에서 사용되는 6가지 X선 측정 기법"
+    files:
+      - path: "02_xray_modalities/README.md"
+        title: "모달리티 개요"
+        level: L1
+        tags: [modality, X-ray, overview]
+
+  - id: "03_ai_ml_methods"
+    title: "AI/ML 방법"
+    icon: "🤖"
+    description: "싱크로트론 데이터 분석에 적용되는 머신러닝 및 AI 방법"
+    files:
+      - path: "03_ai_ml_methods/README.md"
+        title: "AI/ML 개요"
+        level: L1
+        tags: [AI, ML, deep-learning, overview]
+
+  - id: "04_publications"
+    title: "출판물"
+    icon: "📚"
+    description: "싱크로트론 AI/ML 연구를 위한 논문 리뷰 및 출판물 아카이브"
+    files:
+      - path: "04_publications/README.md"
+        title: "출판물 개요"
+        level: L1
+        tags: [publications, review, papers]
+      - path: "04_publications/ber_program_publications.md"
+        title: "BER 프로그램 출판물"
+        level: L2
+        tags: [BER, publications]
+
+  - id: "05_tools_and_code"
+    title: "도구 및 코드"
+    icon: "🛠️"
+    description: "싱크로트론 데이터 처리를 위한 오픈소스 도구 및 소프트웨어"
+    files:
+      - path: "05_tools_and_code/README.md"
+        title: "도구 개요"
+        level: L1
+        tags: [tools, software, open-source]
+
+  - id: "06_data_structures"
+    title: "데이터 구조"
+    icon: "📊"
+    description: "HDF5 스키마, 데이터 규모 분석, 탐색적 데이터 분석"
+    files:
+      - path: "06_data_structures/README.md"
+        title: "데이터 구조 개요"
+        level: L1
+        tags: [data, HDF5, schema]
+
+  - id: "07_data_pipeline"
+    title: "데이터 파이프라인"
+    icon: "🔄"
+    description: "수집부터 저장까지의 엔드투엔드 데이터 파이프라인"
+    files:
+      - path: "07_data_pipeline/README.md"
+        title: "파이프라인 개요"
+        level: L1
+        tags: [pipeline, acquisition, streaming, processing]
+
+  - id: "08_references"
+    title: "참고자료"
+    icon: "🔗"
+    description: "참고문헌, 용어집, 유용한 링크"
+    files:
+      - path: "08_references/README.md"
+        title: "참고자료 개요"
+        level: L1
+        tags: [references, bibliography, glossary]

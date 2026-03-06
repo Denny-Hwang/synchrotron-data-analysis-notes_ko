@@ -1,0 +1,9 @@
+streamlit>=1.40.0
+plotly>=5.18.0
+streamlit-agraph>=0.0.45
+pyyaml>=6.0
+requests>=2.31.0
+bibtexparser>=1.4.0
+nbformat>=5.9.0
+nbconvert>=7.8.0
+markdown>=3.5

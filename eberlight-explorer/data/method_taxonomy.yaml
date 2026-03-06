@@ -1,0 +1,85 @@
+categories:
+  - id: image_segmentation
+    name: "이미지 분할"
+    icon: "🎯"
+    description: "싱크로트론 이미지의 픽셀 수준 분류"
+    dir: "03_ai_ml_methods/image_segmentation"
+    methods:
+      - id: unet_variants
+        name: "U-Net 변형"
+        file: "03_ai_ml_methods/image_segmentation/unet_variants.md"
+      - id: tomo_segmentation
+        name: "토모그래피 분할"
+        file: "03_ai_ml_methods/image_segmentation/tomography_segmentation.md"
+      - id: xrf_cell_seg
+        name: "XRF 세포 분할"
+        file: "03_ai_ml_methods/image_segmentation/xrf_cell_segmentation.md"
+    modalities: [tomography, xrf_microscopy, crystallography]
+
+  - id: denoising
+    name: "노이즈 제거"
+    icon: "🧹"
+    description: "저선량 또는 고속 수집 데이터의 노이즈 저감"
+    dir: "03_ai_ml_methods/denoising"
+    methods:
+      - id: tomogan
+        name: "TomoGAN"
+        file: "03_ai_ml_methods/denoising/tomogan.md"
+      - id: deep_residual_xrf
+        name: "Deep Residual XRF"
+        file: "03_ai_ml_methods/denoising/deep_residual_xrf.md"
+      - id: noise2noise
+        name: "Noise2Noise"
+        file: "03_ai_ml_methods/denoising/noise2noise.md"
+    modalities: [tomography, xrf_microscopy]
+
+  - id: reconstruction
+    name: "재구성"
+    icon: "🏗️"
+    description: "원시 측정 데이터로부터의 이미지/볼륨 재구성"
+    dir: "03_ai_ml_methods/reconstruction"
+    methods:
+      - id: ptychonet
+        name: "PtychoNet"
+        file: "03_ai_ml_methods/reconstruction/ptychonet.md"
+      - id: tomocupy
+        name: "TomocuPy"
+        file: "03_ai_ml_methods/reconstruction/tomocupy.md"
+      - id: inr_dynamic
+        name: "INR Dynamic"
+        file: "03_ai_ml_methods/reconstruction/inr_dynamic.md"
+    modalities: [ptychography, tomography]
+
+  - id: autonomous_experiment
+    name: "자율 실험"
+    icon: "🤖"
+    description: "AI 기반 실험 제어 및 최적화"
+    dir: "03_ai_ml_methods/autonomous_experiment"
+    methods:
+      - id: ai_nerd
+        name: "AI-NERD"
+        file: "03_ai_ml_methods/autonomous_experiment/ai_nerd.md"
+      - id: roi_finder
+        name: "ROI-Finder"
+        file: "03_ai_ml_methods/autonomous_experiment/roi_finder.md"
+      - id: bayesian_opt
+        name: "베이지안 최적화"
+        file: "03_ai_ml_methods/autonomous_experiment/bayesian_optimization.md"
+    modalities: [xrf_microscopy, tomography]
+
+  - id: multimodal_integration
+    name: "다중모달 통합"
+    icon: "🔗"
+    description: "다중 X선 측정 모달리티 결합"
+    dir: "03_ai_ml_methods/multimodal_integration"
+    methods:
+      - id: xrf_ptychography
+        name: "XRF + 타이코그래피"
+        file: "03_ai_ml_methods/multimodal_integration/xrf_ptychography.md"
+      - id: ct_xas
+        name: "CT-XAS 상관관계"
+        file: "03_ai_ml_methods/multimodal_integration/ct_xas_correlation.md"
+      - id: optical_xray
+        name: "광학-X선 정합"
+        file: "03_ai_ml_methods/multimodal_integration/optical_xray_registration.md"
+    modalities: [ptychography, spectroscopy, xrf_microscopy]

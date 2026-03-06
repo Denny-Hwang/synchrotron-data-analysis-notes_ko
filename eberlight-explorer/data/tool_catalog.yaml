@@ -1,0 +1,116 @@
+tools:
+  - id: bluesky_epics
+    name: "Bluesky / EPICS"
+    icon: "🔵"
+    category: "실험 제어"
+    pipeline_stage: acquisition
+    language: "Python"
+    gpu: false
+    maturity: "Production"
+    dir: "05_tools_and_code/bluesky_epics"
+    files:
+      readme: "05_tools_and_code/bluesky_epics/README.md"
+      architecture: "05_tools_and_code/bluesky_epics/architecture.md"
+    modalities: [tomography, xrf_microscopy, ptychography, spectroscopy, crystallography, scattering]
+    tags: [experiment-control, data-acquisition, EPICS, Bluesky]
+
+  - id: tomocupy
+    name: "TomocuPy"
+    icon: "⚡"
+    category: "GPU 재구성"
+    pipeline_stage: processing
+    language: "Python / CUDA"
+    gpu: true
+    maturity: "Production"
+    dir: "05_tools_and_code/tomocupy"
+    files:
+      readme: "05_tools_and_code/tomocupy/README.md"
+      pros_cons: "05_tools_and_code/tomocupy/pros_cons.md"
+      reproduction: "05_tools_and_code/tomocupy/reproduction_guide.md"
+      reverse_eng: "05_tools_and_code/tomocupy/reverse_engineering.md"
+    modalities: [tomography]
+    tags: [GPU, reconstruction, CUDA, real-time]
+
+  - id: tomopy
+    name: "TomoPy"
+    icon: "🔧"
+    category: "CPU 재구성"
+    pipeline_stage: processing
+    language: "Python / C"
+    gpu: false
+    maturity: "Production"
+    dir: "05_tools_and_code/tomopy"
+    files:
+      readme: "05_tools_and_code/tomopy/README.md"
+      pros_cons: "05_tools_and_code/tomopy/pros_cons.md"
+      reverse_eng: "05_tools_and_code/tomopy/reverse_engineering.md"
+    modalities: [tomography]
+    tags: [CPU, reconstruction, FBP, gridrec]
+
+  - id: maps_software
+    name: "MAPS"
+    icon: "🗺️"
+    category: "XRF 분석"
+    pipeline_stage: processing
+    language: "C++ / IDL"
+    gpu: false
+    maturity: "Production"
+    dir: "05_tools_and_code/maps_software"
+    files:
+      readme: "05_tools_and_code/maps_software/README.md"
+      workflow: "05_tools_and_code/maps_software/workflow_analysis.md"
+    modalities: [xrf_microscopy]
+    tags: [XRF, spectral-fitting, elemental-mapping]
+
+  - id: roi_finder
+    name: "ROI-Finder"
+    icon: "🎯"
+    category: "ML 분석"
+    pipeline_stage: analysis
+    language: "Python"
+    gpu: false
+    maturity: "Research"
+    dir: "05_tools_and_code/roi_finder"
+    files:
+      readme: "05_tools_and_code/roi_finder/README.md"
+      pros_cons: "05_tools_and_code/roi_finder/pros_cons.md"
+      reproduction: "05_tools_and_code/roi_finder/reproduction_guide.md"
+      reverse_eng: "05_tools_and_code/roi_finder/reverse_engineering.md"
+    notebooks:
+      - "05_tools_and_code/roi_finder/notebooks/01_data_loading.ipynb"
+      - "05_tools_and_code/roi_finder/notebooks/02_segmentation.ipynb"
+      - "05_tools_and_code/roi_finder/notebooks/03_feature_extraction.ipynb"
+      - "05_tools_and_code/roi_finder/notebooks/04_clustering.ipynb"
+    modalities: [xrf_microscopy]
+    tags: [PCA, fuzzy-c-means, ROI, unsupervised, clustering]
+
+  - id: mlexchange
+    name: "MLExchange"
+    icon: "🔄"
+    category: "ML 플랫폼"
+    pipeline_stage: analysis
+    language: "Python"
+    gpu: true
+    maturity: "Development"
+    dir: "05_tools_and_code/mlexchange"
+    files:
+      readme: "05_tools_and_code/mlexchange/README.md"
+      architecture: "05_tools_and_code/mlexchange/architecture.md"
+      pros_cons: "05_tools_and_code/mlexchange/pros_cons.md"
+    modalities: [tomography, xrf_microscopy, ptychography]
+    tags: [platform, ML, collaborative, web-based]
+
+  - id: aps_github_repos
+    name: "APS GitHub Repos"
+    icon: "🐙"
+    category: "저장소 카탈로그"
+    pipeline_stage: null
+    language: "Various"
+    gpu: false
+    maturity: "Various"
+    dir: "05_tools_and_code/aps_github_repos"
+    files:
+      readme: "05_tools_and_code/aps_github_repos/README.md"
+      catalog: "05_tools_and_code/aps_github_repos/repo_catalog.md"
+    modalities: []
+    tags: [GitHub, open-source, catalog]

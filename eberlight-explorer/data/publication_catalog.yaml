@@ -1,0 +1,156 @@
+publications:
+  - id: review_tomogan_2020
+    title: "TomoGAN: Low-Dose Synchrotron X-Ray Tomography with GANs"
+    authors: "Liu, Z.; Bicer, T.; Kettimuthu, R.; Deng, D.; Foster, I."
+    year: 2020
+    journal: "J. Opt. Soc. Am. A"
+    doi: "10.1364/JOSAA.375595"
+    file: "04_publications/ai_ml_synchrotron/review_tomogan_2020.md"
+    category: denoising
+    modalities: [tomography]
+    tags: [GAN, denoising, dose-reduction, deep-learning, real-time]
+    priority: "High"
+
+  - id: review_roi_finder_2022
+    title: "ROI-Finder: ML-Assisted Region-of-Interest for XRF Microscopy"
+    authors: "Chowdhury, A. Z.; Wen, H.; Jatla, V.; Huang, X.; Chen, S.; Jacobsen, C."
+    year: 2022
+    journal: "J. Synchrotron Rad."
+    doi: "10.1107/S1600577522008876"
+    file: "04_publications/ai_ml_synchrotron/review_roi_finder_2022.md"
+    category: autonomous_experiment
+    modalities: [xrf_microscopy]
+    tags: [XRF, clustering, unsupervised, PCA, fuzzy-c-means, ROI, autonomous]
+    priority: "High"
+
+  - id: review_xrf_gmm_2013
+    title: "Cluster Analysis of XRF Spectra Using GMM"
+    authors: "Ward, J.; Dooley, J.; Bhatt, M.; Mehta, A.; Bhatt, S."
+    year: 2013
+    journal: "Microsc. Microanal."
+    doi: "10.1017/S1431927613001128"
+    file: "04_publications/ai_ml_synchrotron/review_xrf_gmm_2013.md"
+    category: image_segmentation
+    modalities: [xrf_microscopy]
+    tags: [XRF, GMM, clustering, unsupervised, probabilistic, subcellular]
+    priority: "Medium-High"
+
+  - id: review_ptychonet_2019
+    title: "PtychoNet: Fast Ptychographic Phase Retrieval with CNNs"
+    authors: "Cherukara, M. J.; Nashed, Y. S. G.; Harder, R. J."
+    year: 2019
+    journal: "Appl. Phys. Lett."
+    doi: "10.1364/OE.27.006553"
+    file: "04_publications/ai_ml_synchrotron/review_ptychonet_2019.md"
+    category: reconstruction
+    modalities: [ptychography]
+    tags: [ptychography, CNN, phase-retrieval, reconstruction]
+    priority: "High"
+
+  - id: review_deep_residual_xrf_2023
+    title: "Deep Residual Networks for XRF Super-Resolution"
+    authors: "Various"
+    year: 2023
+    journal: "npj Computational Materials"
+    doi: "10.1038/s41524-023-00995-9"
+    file: "04_publications/ai_ml_synchrotron/review_deep_residual_xrf_2023.md"
+    category: denoising
+    modalities: [xrf_microscopy]
+    tags: [XRF, super-resolution, deep-learning, residual]
+    priority: "Medium"
+
+  - id: review_aiedge_ptycho_2023
+    title: "AI at the Edge for Real-Time Ptychography"
+    authors: "Babu, A. V. et al."
+    year: 2023
+    journal: "Nature Communications"
+    doi: "10.1038/s41467-023-41496-z"
+    file: "04_publications/ai_ml_synchrotron/review_aiedge_ptycho_2023.md"
+    category: reconstruction
+    modalities: [ptychography]
+    tags: [edge-computing, ptychography, AI, real-time]
+    priority: "Medium"
+
+  - id: review_ai_edge_ptychography_2023
+    title: "AI Edge Ptychography (Extended Review)"
+    authors: "Babu, A. V. et al."
+    year: 2023
+    journal: "Nature Communications"
+    doi: "10.1038/s41467-023-41496-z"
+    file: "04_publications/ai_ml_synchrotron/review_ai_edge_ptychography_2023.md"
+    category: reconstruction
+    modalities: [ptychography]
+    tags: [edge-computing, ptychography, AI]
+    priority: "Medium"
+
+  - id: review_fullstack_dl_tomo_2023
+    title: "Full-Stack Deep Learning for Tomography"
+    authors: "Various"
+    year: 2023
+    journal: "Fundamental Research"
+    doi: "10.1016/j.fmre.2023.11.003"
+    file: "04_publications/ai_ml_synchrotron/review_fullstack_dl_tomo_2023.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [full-stack, deep-learning, tomography, pipeline]
+    priority: "High"
+
+  - id: review_fullstack_tomo_2023
+    title: "Full-Stack Tomography (Extended Review)"
+    authors: "Various"
+    year: 2023
+    journal: "Fundamental Research"
+    doi: "10.1016/j.fmre.2023.11.003"
+    file: "04_publications/ai_ml_synchrotron/review_fullstack_tomo_2023.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [full-stack, tomography]
+    priority: "Medium"
+
+  - id: review_realtime_uct_hpc_2020
+    title: "Real-Time Micro-CT with HPC"
+    authors: "McClure, M. et al."
+    year: 2020
+    journal: "IEEE SMC"
+    doi: "10.1109/SMC42975.2020.9283269"
+    file: "04_publications/ai_ml_synchrotron/review_realtime_uct_hpc_2020.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [real-time, HPC, streaming, tomography]
+    priority: "High"
+
+  - id: review_ai_nerd_2024
+    title: "AI-NERD: Autonomous Experiment Design"
+    authors: "Horwath, J. P. et al."
+    year: 2024
+    journal: "Nature Communications"
+    doi: "10.1038/s41467-024-47210-5"
+    file: "04_publications/ai_ml_synchrotron/review_ai_nerd_2024.md"
+    category: autonomous_experiment
+    modalities: [xrf_microscopy, tomography]
+    tags: [autonomous, experiment, reinforcement-learning]
+    priority: "High"
+
+  - id: review_ai_als_workshop_2024
+    title: "AI for ALS Workshop Report"
+    authors: "Various"
+    year: 2024
+    journal: "Synchrotron Radiation News"
+    doi: "10.1080/08940886.2024.2391258"
+    file: "04_publications/ai_ml_synchrotron/review_ai_als_workshop_2024.md"
+    category: autonomous_experiment
+    modalities: [tomography, xrf_microscopy, ptychography]
+    tags: [workshop, ALS, AI, roadmap]
+    priority: "Medium"
+
+  - id: review_alphafold_2021
+    title: "AlphaFold & Structural Biology"
+    authors: "Jumper, J. et al."
+    year: 2021
+    journal: "Nature"
+    doi: "10.1038/s41586-021-03819-2"
+    file: "04_publications/ai_ml_synchrotron/review_alphafold_2021.md"
+    category: reconstruction
+    modalities: [crystallography]
+    tags: [AlphaFold, protein, structure-prediction]
+    priority: "Medium"
