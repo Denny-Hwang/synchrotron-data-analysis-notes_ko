@@ -68,11 +68,12 @@ PAPER_DIAGRAMS = {
     },
     "review_ptychonet_2019": {
         "code": """graph LR
-    A["Diffraction Patterns"] --> B["CNN Encoder"]
-    B --> C["Latent Representation"]
-    C --> D["CNN Decoder"]
-    D --> E["Phase + Amplitude"]
-    F["ePIE Iterative Solver"] -.-> E""",
+    A["Diffraction Patterns"] --> B["Log-scale & Normalize"]
+    B --> C["CNN Encoder-Decoder"]
+    C --> D["Amplitude & Phase Patches"]
+    D --> E["Overlap-weighted Stitching"]
+    E --> F["Optional ePIE Refinement"]
+    F --> G["Final Reconstruction"]""",
         "height": 250,
     },
     "review_fullstack_dl_tomo_2023": {
@@ -95,6 +96,71 @@ PAPER_DIAGRAMS = {
     F -->|"next measurement"| A""",
         "height": 250,
     },
+    "review_deep_residual_xrf_2023": {
+        "code": """graph LR
+    A["Low-res XRF Map"] --> B["Upscale Interpolation"]
+    B --> C["Deep Residual Network"]
+    C --> D["Residual Learning"]
+    D --> E["Super-resolved XRF Map"]
+    F["High-res Ground Truth"] -.-> C""",
+        "height": 250,
+    },
+    "review_ai_edge_ptychography_2023": {
+        "code": """graph LR
+    A["Detector Stream"] --> B["Edge FPGA/GPU"]
+    B --> C["Lightweight CNN"]
+    C --> D["Real-time Phase"]
+    D --> E["Feedback to Scan"]
+    F["Full Recon on HPC"] -.-> D""",
+        "height": 250,
+    },
+    "review_aiedge_ptycho_2023": {
+        "code": """graph LR
+    A["Detector Stream"] --> B["Edge FPGA/GPU"]
+    B --> C["Lightweight CNN"]
+    C --> D["Real-time Phase"]
+    D --> E["Feedback to Scan"]
+    F["Full Recon on HPC"] -.-> D""",
+        "height": 250,
+    },
+    "review_realtime_uct_hpc_2020": {
+        "code": """graph LR
+    A["Detector @ 2-BM"] --> B["Streaming to HPC"]
+    B --> C["TomoPy Recon"]
+    C --> D["GPU Filtering"]
+    D --> E["Real-time 3D Volume"]
+    E --> F["Live Visualization"]""",
+        "height": 250,
+    },
+    "review_ai_als_workshop_2024": {
+        "code": """graph TB
+    A["AI@ALS Workshop 2024"] --> B["Autonomous Experiments"]
+    A --> C["Real-time Analysis"]
+    A --> D["Data Management"]
+    B --> E["Adaptive Scanning"]
+    C --> F["Edge Computing"]
+    D --> G["FAIR Data Practices"]""",
+        "height": 300,
+    },
+    "review_alphafold_2021": {
+        "code": """graph LR
+    A["Amino Acid Sequence"] --> B["MSA + Templates"]
+    B --> C["Evoformer"]
+    C --> D["Structure Module"]
+    D --> E["3D Coordinates"]
+    E --> F["Confidence pLDDT"]""",
+        "height": 250,
+    },
+    "review_fullstack_tomo_2023": {
+        "code": """graph TB
+    A["Raw Projections"] --> B["Preprocessing"]
+    B --> C["Reconstruction"]
+    C --> D["Denoising"]
+    D --> E["Segmentation"]
+    E --> F["Quantification"]
+    F --> G["Visualization"]""",
+        "height": 350,
+    },
 }
 
 
@@ -107,6 +173,19 @@ def _paper_link(paper: dict) -> str:
     elif url:
         return f"[Link]({url})"
     return ""
+
+
+def _extract_review_section(content: str, name: str) -> str | None:
+    """Extract section with common aliases."""
+    alias_map = {
+        "Relevance": ["Relevance to APS BER Program", "Relevance to eBERlight",
+                       "Relevance to BER", "BER Relevance"],
+        "Limitations": ["Limitations & Gaps", "Limitations"],
+        "Background": ["Background & Motivation", "Background"],
+        "Takeaways": ["Actionable Takeaways", "Takeaways"],
+    }
+    aliases = alias_map.get(name, [name])
+    return extract_section(content, aliases[0], aliases[1:] if len(aliases) > 1 else None)
 
 
 if level == "L0":
@@ -141,7 +220,7 @@ if level == "L0":
     st.plotly_chart(fig, use_container_width=True)
 
 elif level == "L1":
-    # Group by category
+    # Group by category with TL;DR and key results
     st.subheader("주제별 논문")
     from collections import defaultdict
     by_cat = defaultdict(list)
@@ -159,6 +238,20 @@ elif level == "L1":
         with st.expander(f"{icon} {cat.replace('_', ' ').title()} ({len(cat_papers)}편)", expanded=True):
             for p in sorted(cat_papers, key=lambda x: x["year"], reverse=True):
                 render_paper_card(p, show_detail=False)
+                content = read_local_file(p["file"])
+                if content:
+                    tldr = extract_tldr(content)
+                    if tldr:
+                        st.markdown(f"> {tldr[:400]}{'...' if len(tldr) > 400 else ''}")
+
+                    # Show key results summary table
+                    key_results = extract_section(content, "Key Results")
+                    if key_results:
+                        lines = [l for l in key_results.split("\n") if l.strip()]
+                        table_lines = [l for l in lines if l.strip().startswith("|")]
+                        if table_lines:
+                            st.markdown("\n".join(table_lines[:8]))
+                st.markdown("---")
 
 elif level == "L2":
     # Individual paper detail
@@ -198,37 +291,39 @@ elif level == "L2":
         paper_id = os.path.splitext(os.path.basename(paper["file"]))[0]
         diagram_info = PAPER_DIAGRAMS.get(paper_id)
 
-        tab_names = ["파이프라인 다이어그램", "방법", "주요 결과", "강점", "한계", "BER 관련성", "전체 리뷰"]
+        # Build section tabs
+        section_defs = [
+            ("파이프라인 다이어그램", None),
+            ("배경", "Background"),
+            ("방법", "Method"),
+            ("주요 결과", "Key Results"),
+            ("강점", "Strengths"),
+            ("한계", "Limitations"),
+            ("BER 관련성", "Relevance"),
+            ("실행 요점", "Takeaways"),
+            ("전체 리뷰", None),
+        ]
+
+        # Skip diagram tab if no diagram
         if not diagram_info:
-            tab_names = tab_names[1:]  # skip diagram tab if none
+            section_defs = section_defs[1:]
 
+        tab_names = [s[0] for s in section_defs]
         tabs = st.tabs(tab_names)
-        tab_offset = 0
 
-        if diagram_info:
-            with tabs[0]:
-                st.markdown("#### 방법 파이프라인")
-                render_mermaid(diagram_info["code"], height=diagram_info["height"])
-            tab_offset = 1
-
-        section_map = {
-            0: "Method",
-            1: "Key Results",
-            2: "Strengths",
-            3: "Limitations",
-            4: "Relevance to APS BER Program",
-        }
-
-        for i in range(5):
-            with tabs[tab_offset + i]:
-                section_content = extract_section(content, section_map[i])
-                if section_content:
-                    st.markdown(section_content)
-                else:
-                    st.info("이 리뷰에서 해당 섹션을 찾을 수 없습니다.")
-
-        with tabs[-1]:
-            st.markdown(content, unsafe_allow_html=False)
+        for idx, (tab_name, section_key) in enumerate(section_defs):
+            with tabs[idx]:
+                if tab_name == "파이프라인 다이어그램" and diagram_info:
+                    st.markdown("#### 방법 파이프라인")
+                    render_mermaid(diagram_info["code"], height=diagram_info["height"])
+                elif tab_name == "전체 리뷰":
+                    st.markdown(content, unsafe_allow_html=False)
+                elif section_key:
+                    section_content = _extract_review_section(content, section_key)
+                    if section_content:
+                        st.markdown(section_content)
+                    else:
+                        st.info(f"이 리뷰에서 '{tab_name}' 섹션을 찾을 수 없습니다.")
 
 elif level == "L3":
     paper_titles = [f"[{p['year']}] {p['title']}" for p in unique_papers]
