@@ -51,21 +51,30 @@ def extract_metadata_table(markdown_text: str) -> dict:
     return metadata
 
 
-def extract_section(markdown_text: str, section_name: str) -> str | None:
-    """특정 ## 제목 아래의 콘텐츠를 추출합니다."""
-    lines = markdown_text.split("\n")
-    capturing = False
-    result = []
-    for line in lines:
-        if line.strip().startswith("## ") and section_name.lower() in line.lower():
-            capturing = True
-            continue
-        elif line.strip().startswith("## ") and capturing:
-            break
-        elif capturing:
-            result.append(line)
-    if result:
-        return "\n".join(result).strip()
+def extract_section(markdown_text: str, section_name: str,
+                     aliases: list[str] | None = None) -> str | None:
+    """특정 ## 제목 아래의 콘텐츠를 추출합니다.
+
+    Args:
+        markdown_text: 전체 마크다운 콘텐츠.
+        section_name: 검색할 기본 제목 (부분 문자열 매칭).
+        aliases: 기본 제목을 찾지 못했을 때 시도할 대체 제목 부분 문자열.
+    """
+    names_to_try = [section_name] + (aliases or [])
+    for name in names_to_try:
+        lines = markdown_text.split("\n")
+        capturing = False
+        result = []
+        for line in lines:
+            if line.strip().startswith("## ") and name.lower() in line.lower():
+                capturing = True
+                continue
+            elif line.strip().startswith("## ") and capturing:
+                break
+            elif capturing:
+                result.append(line)
+        if result:
+            return "\n".join(result).strip()
     return None
 
 
