@@ -65,7 +65,10 @@ categories:
       - id: bayesian_opt
         name: "베이지안 최적화"
         file: "03_ai_ml_methods/autonomous_experiment/bayesian_optimization.md"
-    modalities: [xrf_microscopy, tomography]
+      - id: ki_bo_xanes
+        name: "XANES용 지식 주입 BO"
+        file: "03_ai_ml_methods/autonomous_experiment/knowledge_injected_bo.md"
+    modalities: [xrf_microscopy, tomography, spectroscopy]
 
   - id: multimodal_integration
     name: "다중모달 통합"
