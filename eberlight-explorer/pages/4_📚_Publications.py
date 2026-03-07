@@ -96,6 +96,18 @@ PAPER_DIAGRAMS = {
     F -->|"next measurement"| A""",
         "height": 250,
     },
+    "review_aidriven_xanes_2025": {
+        "code": """graph LR
+    A["시드 포인트 5-10"] --> B["GP 서로게이트 피팅"]
+    B --> C["지식 주입\\n획득 함수"]
+    C --> D["다음 에너지 E* 선택"]
+    D --> E["모노크로메이터 + 측정"]
+    E --> F["GP 업데이트"]
+    F -->|"반복"| B
+    G["에지 사전확률 P_edge"] -.-> C
+    H["기울기 |∂μ/∂E|"] -.-> C""",
+        "height": 280,
+    },
     "review_deep_residual_xrf_2023": {
         "code": """graph LR
     A["Low-res XRF Map"] --> B["Upscale Interpolation"]

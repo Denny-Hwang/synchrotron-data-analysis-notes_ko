@@ -143,6 +143,18 @@ publications:
     tags: [workshop, ALS, AI, roadmap]
     priority: "Medium"
 
+  - id: review_aidriven_xanes_2025
+    title: "AI-Driven Workflow for Dynamic X-Ray Spectroscopy"
+    authors: "Du, M.; Wolfman, M.; Sun, C.; Kelly, S. D.; Cherukara, M. J."
+    year: 2025
+    journal: "npj Comput. Mater."
+    doi: "10.1038/s41524-025-01771-7"
+    file: "04_publications/ai_ml_synchrotron/review_aidriven_xanes_2025.md"
+    category: autonomous_experiment
+    modalities: [spectroscopy]
+    tags: [XANES, Bayesian-optimization, adaptive-sampling, autonomous, Bluesky, operando]
+    priority: "High"
+
   - id: review_alphafold_2021
     title: "AlphaFold & Structural Biology"
     authors: "Jumper, J. et al."

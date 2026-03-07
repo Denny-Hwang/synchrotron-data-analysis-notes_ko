@@ -3,7 +3,7 @@ modality_method:
   xrf_microscopy: [image_segmentation, denoising, autonomous_experiment]
   ptychography: [reconstruction, multimodal_integration]
   crystallography: [image_segmentation]
-  spectroscopy: [multimodal_integration]
+  spectroscopy: [multimodal_integration, autonomous_experiment]
   scattering: []
 
 method_paper:
@@ -17,6 +17,7 @@ method_paper:
   fullstack_tomo: [review_fullstack_dl_tomo_2023, review_fullstack_tomo_2023]
   realtime_hpc: [review_realtime_uct_hpc_2020]
   alphafold: [review_alphafold_2021]
+  ki_bo_xanes: [review_aidriven_xanes_2025]
 
 tool_pipeline_stage:
   bluesky_epics: acquisition
