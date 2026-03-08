@@ -54,9 +54,9 @@
 
 | 자원           | 링크 / 참고                                                           |
 |----------------|-----------------------------------------------------------------------|
-| **코드**       | 부분 공개 (GitHub에 추론 스크립트 및 모델 가중치)                     |
-| **데이터**     | 시뮬레이션 훈련 세트 이용 가능; 실험 데이터는 요청 시 제공            |
-| **라이선스**   | 논문에 명시적으로 기재되지 않음                                       |
+| **코드**       | [edgePtychoNN](https://github.com/vbanakha/edgePtychoNN) — TensorRT inference + EPICS PVA streaming on Jetson AGX Xavier |
+| **데이터**     | [Zenodo 8121606](https://zenodo.org/records/8121606) — 121 spiral scans × 963 diffraction images (.npy), CC BY 4.0 |
+| **라이선스**   | Code: not explicitly stated; Data: CC BY 4.0                                       |
 | **재현성 점수** | **3 / 5** -- 추론 코드 및 사전 훈련 가중치 이용 가능; FPGA 합성 스크립트 및 전체 훈련 파이프라인은 미공개. |
 
 ---

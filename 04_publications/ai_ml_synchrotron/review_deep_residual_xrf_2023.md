@@ -4,8 +4,8 @@
 
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
-| **제목**           | Resolution Enhancement for X-Ray Fluorescence Microscopy via Deep Residual Networks    |
-| **저자**           | Zhang, Y.; Chen, S.; Peng, T.; Deng, J.; Jacobsen, C.; Vogt, S.                      |
+| **제목**           | Resolution-Enhanced X-ray Fluorescence Microscopy via Deep Residual Networks    |
+| **저자**           | Wu, L.; Bak, S.; Shin, Y.; Chu, Y. S.; Yoo, S.; Robinson, I. K.; Huang, X.                      |
 | **저널**           | npj Computational Materials, 9, Article 86                                             |
 | **연도**           | 2023                                                                                   |
 | **DOI**            | [10.1038/s41524-023-00995-9](https://doi.org/10.1038/s41524-023-00995-9)               |

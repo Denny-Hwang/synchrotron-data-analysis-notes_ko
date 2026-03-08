@@ -1,7 +1,7 @@
 publications:
   - id: review_tomogan_2020
     title: "TomoGAN: Low-Dose Synchrotron X-Ray Tomography with GANs"
-    authors: "Liu, Z.; Bicer, T.; Kettimuthu, R.; Deng, D.; Foster, I."
+    authors: "Liu, Z.; Bicer, T.; Kettimuthu, R.; Gursoy, D.; De Carlo, F.; Foster, I."
     year: 2020
     journal: "J. Opt. Soc. Am. A"
     doi: "10.1364/JOSAA.375595"
@@ -13,7 +13,7 @@ publications:
 
   - id: review_roi_finder_2022
     title: "ROI-Finder: ML-Assisted Region-of-Interest for XRF Microscopy"
-    authors: "Chowdhury, A. Z.; Wen, H.; Jatla, V.; Huang, X.; Chen, S.; Jacobsen, C."
+    authors: "Chowdhury, M. A. Z.; Ok, K.; Luo, Y.; Liu, Z.; Chen, S.; O'Halloran, T. V.; Kettimuthu, R.; Tekawade, A."
     year: 2022
     journal: "J. Synchrotron Rad."
     doi: "10.1107/S1600577522008876"
@@ -24,11 +24,11 @@ publications:
     priority: "High"
 
   - id: review_xrf_gmm_2013
-    title: "Cluster Analysis of XRF Spectra Using GMM"
-    authors: "Ward, J.; Dooley, J.; Bhatt, M.; Mehta, A.; Bhatt, S."
+    title: "Rapid and Accurate Analysis of an X-Ray Fluorescence Microscopy Data Set through Gaussian Mixture-Based Soft Clustering Methods"
+    authors: "Ward, J.; Marvin, R.; O'Halloran, T.; Jacobsen, C.; Vogt, S."
     year: 2013
     journal: "Microsc. Microanal."
-    doi: "10.1017/S1431927613001128"
+    doi: "10.1017/S1431927613012737"
     file: "04_publications/ai_ml_synchrotron/review_xrf_gmm_2013.md"
     category: image_segmentation
     modalities: [xrf_microscopy]
@@ -36,11 +36,11 @@ publications:
     priority: "Medium-High"
 
   - id: review_ptychonet_2019
-    title: "PtychoNet: Fast Ptychographic Phase Retrieval with CNNs"
-    authors: "Cherukara, M. J.; Nashed, Y. S. G.; Harder, R. J."
+    title: "PtychoNet: Fast and High Quality Phase Retrieval for Ptychography"
+    authors: "Guan, Z.; Tsai, E. H. R.; Huang, X.; Yager, K. G.; Qin, H."
     year: 2019
-    journal: "Appl. Phys. Lett."
-    doi: "10.1364/OE.27.006553"
+    journal: "BMVC 2019"
+    doi: "10.2172/1599580"
     file: "04_publications/ai_ml_synchrotron/review_ptychonet_2019.md"
     category: reconstruction
     modalities: [ptychography]
@@ -48,8 +48,8 @@ publications:
     priority: "High"
 
   - id: review_deep_residual_xrf_2023
-    title: "Deep Residual Networks for XRF Super-Resolution"
-    authors: "Various"
+    title: "Resolution-Enhanced X-ray Fluorescence Microscopy via Deep Residual Networks"
+    authors: "Wu, L.; Bak, S.; Shin, Y.; Chu, Y. S.; Yoo, S.; Robinson, I. K.; Huang, X."
     year: 2023
     journal: "npj Computational Materials"
     doi: "10.1038/s41524-023-00995-9"
@@ -84,11 +84,11 @@ publications:
     priority: "Medium"
 
   - id: review_fullstack_dl_tomo_2023
-    title: "Full-Stack Deep Learning for Tomography"
-    authors: "Various"
+    title: "Towards Full-Stack Deep Learning-Empowered Data Processing Pipeline for Synchrotron Tomography Experiments"
+    authors: "Zhang, Z.; Li, C.; Wang, W.; Dong, Z.; Liu, G.; Dong, Y.; Zhang, Y."
     year: 2023
-    journal: "Fundamental Research"
-    doi: "10.1016/j.fmre.2023.11.003"
+    journal: "The Innovation"
+    doi: "10.1016/j.xinn.2023.100539"
     file: "04_publications/ai_ml_synchrotron/review_fullstack_dl_tomo_2023.md"
     category: reconstruction
     modalities: [tomography]
@@ -97,10 +97,10 @@ publications:
 
   - id: review_fullstack_tomo_2023
     title: "Full-Stack Tomography (Extended Review)"
-    authors: "Various"
+    authors: "Zhang, Z.; Li, C.; Wang, W.; Dong, Z.; Liu, G.; Dong, Y.; Zhang, Y."
     year: 2023
-    journal: "Fundamental Research"
-    doi: "10.1016/j.fmre.2023.11.003"
+    journal: "The Innovation"
+    doi: "10.1016/j.xinn.2023.100539"
     file: "04_publications/ai_ml_synchrotron/review_fullstack_tomo_2023.md"
     category: reconstruction
     modalities: [tomography]
@@ -108,11 +108,11 @@ publications:
     priority: "Medium"
 
   - id: review_realtime_uct_hpc_2020
-    title: "Real-Time Micro-CT with HPC"
-    authors: "McClure, M. et al."
+    title: "Toward Real-Time Analysis of Synchrotron Micro-Tomography Data: Accelerating Experimental Workflows with AI and HPC"
+    authors: "McClure, J. E.; Yin, J.; Armstrong, R. T.; Maheshwari, K. C.; Wilkinson, S.; Vlcek, L.; Wang, Y. D.; Berrill, M. A.; Rivers, M."
     year: 2020
-    journal: "IEEE SMC"
-    doi: "10.1109/SMC42975.2020.9283269"
+    journal: "SMC 2020 (Smoky Mountains Comp. Sci. Eng.)"
+    doi: "10.1007/978-3-030-63393-6_15"
     file: "04_publications/ai_ml_synchrotron/review_realtime_uct_hpc_2020.md"
     category: reconstruction
     modalities: [tomography]
@@ -120,20 +120,20 @@ publications:
     priority: "High"
 
   - id: review_ai_nerd_2024
-    title: "AI-NERD: Autonomous Experiment Design"
-    authors: "Horwath, J. P. et al."
+    title: "AI-NERD: Elucidation of Relaxation Dynamics Beyond Equilibrium through AI-Informed X-ray Photon Correlation Spectroscopy"
+    authors: "Horwath, J. P.; Lin, X.-M.; He, H.; Zhang, Q.; Dufresne, E. M.; Chu, M.; Sankaranarayanan, S. K. R. S.; Chen, W.; Narayanan, S.; Cherukara, M. J."
     year: 2024
     journal: "Nature Communications"
-    doi: "10.1038/s41467-024-47210-5"
+    doi: "10.1038/s41467-024-49381-z"
     file: "04_publications/ai_ml_synchrotron/review_ai_nerd_2024.md"
     category: autonomous_experiment
-    modalities: [xrf_microscopy, tomography]
-    tags: [autonomous, experiment, reinforcement-learning]
+    modalities: [scattering]
+    tags: [autonomous, XPCS, unsupervised, dynamics, AI]
     priority: "High"
 
   - id: review_ai_als_workshop_2024
     title: "AI for ALS Workshop Report"
-    authors: "Various"
+    authors: "Parkinson, D.; Chavez, T.; Choudhary, M. et al."
     year: 2024
     journal: "Synchrotron Radiation News"
     doi: "10.1080/08940886.2024.2391258"

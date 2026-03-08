@@ -5,7 +5,7 @@
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
 | **제목**           | TomoGAN: Low-Dose Synchrotron X-Ray Tomography with Generative Adversarial Networks    |
-| **저자**           | Liu, Z.; Bicer, T.; Kettimuthu, R.; Deng, D.; Foster, I.                              |
+| **저자**           | Liu, Z.; Bicer, T.; Kettimuthu, R.; Gursoy, D.; De Carlo, F.; Foster, I.              |
 | **저널**           | Journal of the Optical Society of America A, 37(3), 422--434                           |
 | **연도**           | 2020                                                                                   |
 | **DOI**            | [10.1364/JOSAA.375595](https://doi.org/10.1364/JOSAA.375595)                           |

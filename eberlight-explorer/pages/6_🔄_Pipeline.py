@@ -8,7 +8,7 @@ from utils.content_parser import load_yaml, read_local_file
 from components.level_selector import render_level_selector
 from components.common_styles import inject_styles
 from components.pipeline_diagram import render_pipeline_diagram
-from components.markdown_viewer import render_markdown
+from components.markdown_viewer import render_markdown, render_content
 
 st.set_page_config(page_title="데이터 파이프라인", page_icon="🔄", layout="wide")
 
@@ -38,14 +38,14 @@ elif level in ("L1", "L2"):
     # Overview from README
     readme_content = read_local_file("07_data_pipeline/README.md")
     if readme_content and level == "L1":
-        st.markdown(readme_content)
+        render_content(readme_content)
 
     if level == "L2":
         # Architecture diagram
         arch_content = read_local_file("07_data_pipeline/architecture_diagram.md")
         if arch_content:
             with st.expander("🏗️ 아키텍처 다이어그램", expanded=True):
-                st.markdown(arch_content)
+                render_content(arch_content)
 
         # Individual stage tabs
         tab_names = [f"{s['icon']} {s['name']}" for s in stages]

@@ -5,10 +5,10 @@
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
 | **제목**           | Cluster Analysis of Subcellular XRF Maps from *Plasmodium falciparum*-Infected Erythrocytes |
-| **저자**           | Ward, J.; Dooley, J.; Bhatt, M.; Mehta, A.; Bhatt, S.                                 |
+| **저자**           | Ward, J.; Marvin, R.; O'Halloran, T.; Jacobsen, C.; Vogt, S.                          |
 | **저널**           | Microscopy and Microanalysis, 19(5)                                                    |
 | **연도**           | 2013                                                                                   |
-| **DOI**            | 10.1017/S1431927613001128 (Proceedings / Supplement)                                   |
+| **DOI**            | [10.1017/S1431927613012737](https://doi.org/10.1017/S1431927613012737)                 |
 | **빔라인**         | APS 2-ID-E (경 X선 형광 나노프로브)                                                    |
 | **측정 기법**      | X선 형광(X-Ray Fluorescence, XRF) 현미경                                                |
 

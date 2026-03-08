@@ -68,6 +68,8 @@
 | Tike | [https://github.com/AdvancedPhotonSource/tike](https://github.com/AdvancedPhotonSource/tike) | APS 타이코그래피 + 단층촬영 툴킷 |
 | PtychoPy | [https://github.com/ptycho/ptypy](https://github.com/ptycho/ptypy) | 타이코그래피 재구성 |
 | PyNX | [http://ftp.esrf.fr/pub/scisoft/PyNX/](http://ftp.esrf.fr/pub/scisoft/PyNX/) | GPU 가속 코히어런트 이미징 |
+| edgePtychoNN | [https://github.com/vbanakha/edgePtychoNN](https://github.com/vbanakha/edgePtychoNN) | 타이코그래피 실시간 엣지 추론 (TensorRT + EPICS PVA) |
+| PtychoNN | [https://github.com/mcherukara/PtychoNN](https://github.com/mcherukara/PtychoNN) | 타이코그래피 이미징용 딥러닝 |
 
 ## APS GitHub 조직
 
@@ -92,6 +94,7 @@
 |--------|-----|------|
 | TomoBank | [https://tomobank.readthedocs.io](https://tomobank.readthedocs.io) | APS 단층촬영 데이터셋 |
 | CXIDB | [https://cxidb.org](https://cxidb.org) | 코히어런트 X선 이미징 데이터베이스 |
+| edgePtychoNN 데이터 | [https://zenodo.org/records/8121606](https://zenodo.org/records/8121606) | 타이코그래피 회절 데이터셋 (Babu 2023) |
 | PDB | [https://www.rcsb.org](https://www.rcsb.org) | 단백질 데이터 뱅크 |
 | AlphaFold DB | [https://alphafold.ebi.ac.uk](https://alphafold.ebi.ac.uk) | 단백질 구조 예측 |
 | SBGrid Data | [https://data.sbgrid.org](https://data.sbgrid.org) | 원시 회절 데이터셋 |
@@ -102,7 +105,7 @@
 |------|-----|
 | ROI-Finder (Chowdhury 2022) | [10.1107/S1600577522008876](https://doi.org/10.1107/S1600577522008876) |
 | AI@Edge Ptychography (Babu 2023) | [10.1038/s41467-023-41496-z](https://doi.org/10.1038/s41467-023-41496-z) |
-| Full-Stack DL Tomo (2023) | [10.1016/j.fmre.2023.11.003](https://doi.org/10.1016/j.fmre.2023.11.003) |
+| Full-Stack DL Tomo (2023) | [10.1016/j.xinn.2023.100539](https://doi.org/10.1016/j.xinn.2023.100539) |
 | Deep Residual XRF (2023) | [10.1038/s41524-023-00995-9](https://doi.org/10.1038/s41524-023-00995-9) |
 | AI@ALS Workshop (2024) | [10.1080/08940886.2024.2391258](https://doi.org/10.1080/08940886.2024.2391258) |
 | TomoPy (Gürsoy 2014) | [10.1107/S1600577514013939](https://doi.org/10.1107/S1600577514013939) |

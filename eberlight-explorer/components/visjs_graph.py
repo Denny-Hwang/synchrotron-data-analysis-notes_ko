@@ -74,30 +74,6 @@ def render_visjs_graph(nodes: list[dict], edges: list[dict],
     nodes_json = json.dumps(vis_nodes)
     edges_json = json.dumps(vis_edges)
 
-    layout_config = ""
-    if hierarchical:
-        layout_config = """
-            layout: {
-                hierarchical: {
-                    enabled: true,
-                    direction: 'UD',
-                    sortMethod: 'directed',
-                    levelSeparation: 120,
-                    nodeSpacing: 180,
-                    treeSpacing: 200,
-                    blockShifting: true,
-                    edgeMinimization: true,
-                }
-            },
-        """
-    else:
-        layout_config = """
-            layout: {
-                hierarchical: false,
-                improvedLayout: true,
-            },
-        """
-
     html = f"""
     <!DOCTYPE html>
     <html>
@@ -109,140 +85,131 @@ def render_visjs_graph(nodes: list[dict], edges: list[dict],
             #controls {{ padding: 8px 12px; display: flex; gap: 12px; align-items: center; }}
             #controls label {{ font-size: 13px; color: #555; cursor: pointer; }}
             #controls input {{ cursor: pointer; }}
-            #legend {{ display: flex; gap: 16px; padding: 6px 12px; flex-wrap: wrap; }}
-            .legend-item {{ display: flex; align-items: center; gap: 5px; font-size: 13px; color: #444; }}
-            .legend-dot {{ width: 14px; height: 14px; border-radius: 50%; box-shadow: 2px 2px 4px rgba(0,0,0,0.15); }}
+            .mode-btn {{
+                padding: 6px 16px; border: 2px solid #ccc; border-radius: 8px;
+                background: #fff; cursor: pointer; font-size: 13px; color: #555;
+                transition: all 0.2s;
+            }}
+            .mode-btn.active {{ border-color: #00D4AA; background: #E6FFF9; color: #007A5E; font-weight: 600; }}
+            .mode-btn:hover {{ border-color: #00D4AA; }}
         </style>
     </head>
     <body>
         <div id="controls">
-            <label><input type="checkbox" id="hierToggle" {"checked" if hierarchical else ""}
-                   onchange="toggleLayout()"> 계층적 레이아웃</label>
-            <label><input type="checkbox" id="physToggle" {"" if hierarchical else "checked"}
-                   onchange="togglePhysics()"> 물리 시뮬레이션</label>
-            <label style="margin-left:auto; font-size:12px; color:#999;">
-                노드를 드래그하여 재배치 &middot; 스크롤하여 확대/축소 &middot; 클릭하여 강조
-            </label>
+            <button class="mode-btn {"active" if not hierarchical else ""}" id="btnPhysics" onclick="switchMode('physics')">
+                🌀 힘 기반 배치
+            </button>
+            <button class="mode-btn {"active" if hierarchical else ""}" id="btnHier" onclick="switchMode('hierarchy')">
+                📊 계층적 배치
+            </button>
+            <button class="mode-btn" id="btnFreeze" onclick="switchMode('freeze')">
+                ❄️ 고정
+            </button>
+            <span style="margin-left:auto; font-size:12px; color:#999;">
+                노드 드래그 &middot; 스크롤로 확대/축소 &middot; 클릭하여 강조
+            </span>
         </div>
         <div id="graph"></div>
-        <div id="legend">
-            <div class="legend-item"><div class="legend-dot" style="background:#00D4AA;"></div> 모달리티 (6)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#FFB800;"></div> AI/ML 방법 (5)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#1B3A5C;"></div> 논문 (13)</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#E8515D;"></div> 도구 (6)</div>
-            <div class="legend-item" style="margin-left:auto; font-size:12px; color:#aaa;">― 실선 = 사용 &nbsp; - - 점선 = 지원</div>
-        </div>
         <script>
-            // Store original colors for highlight reset
             var nodeList = {nodes_json};
             var edgeList = {edges_json};
             var originalColors = {{}};
             nodeList.forEach(function(n) {{ originalColors[n.id] = JSON.parse(JSON.stringify(n.color)); }});
 
-            var nodesData = new vis.DataSet(nodeList);
-            var edgesData = new vis.DataSet(edgeList);
             var container = document.getElementById('graph');
+            var network = null;
+            var currentMode = '{"hierarchy" if hierarchical else "physics"}';
 
-            var options = {{
-                {layout_config}
-                physics: {{
-                    enabled: {"false" if hierarchical else "true"},
-                    solver: 'forceAtlas2Based',
-                    forceAtlas2Based: {{
-                        gravitationalConstant: -60,
-                        centralGravity: 0.008,
-                        springLength: 160,
-                        springConstant: 0.04,
-                        damping: 0.4,
-                        avoidOverlap: 0.8,
+            function buildOptions(mode) {{
+                var base = {{
+                    interaction: {{
+                        hover: true, tooltipDelay: 200, zoomView: true,
+                        dragNodes: true, dragView: true,
                     }},
-                    stabilization: {{ iterations: 200 }},
-                }},
-                interaction: {{
-                    hover: true,
-                    tooltipDelay: 200,
-                    zoomView: true,
-                    dragNodes: true,
-                    dragView: true,
-                    navigationButtons: false,
-                    keyboard: false,
-                    multiselect: true,
-                }},
-                nodes: {{
-                    scaling: {{ min: 12, max: 40 }},
-                }},
-                edges: {{
-                    selectionWidth: 2,
-                    hoverWidth: 2,
-                }},
-            }};
+                    nodes: {{ scaling: {{ min: 12, max: 40 }} }},
+                    edges: {{ selectionWidth: 2, hoverWidth: 2 }},
+                }};
 
-            var network = new vis.Network(container, {{ nodes: nodesData, edges: edgesData }}, options);
-
-            // Highlight neighbors on click
-            network.on("click", function(params) {{
-                if (params.nodes.length > 0) {{
-                    var selectedNode = params.nodes[0];
-                    var connectedNodes = network.getConnectedNodes(selectedNode);
-
-                    nodesData.get().forEach(function(n) {{
-                        if (n.id === selectedNode || connectedNodes.indexOf(n.id) !== -1) {{
-                            nodesData.update({{ id: n.id, color: originalColors[n.id], font: {{ color: '#1A1A2E' }} }});
-                        }} else {{
-                            nodesData.update({{ id: n.id, color: {{ background: '#E0E0E0', border: '#CCC' }}, font: {{ color: '#CCC' }} }});
+                if (mode === 'hierarchy') {{
+                    base.layout = {{
+                        hierarchical: {{
+                            enabled: true, direction: 'UD', sortMethod: 'directed',
+                            levelSeparation: 130, nodeSpacing: 160,
+                            treeSpacing: 200, blockShifting: true,
+                            edgeMinimization: true, parentCentralization: true,
                         }}
-                    }});
-                }} else {{
-                    // Reset all
-                    nodesData.get().forEach(function(n) {{
-                        nodesData.update({{ id: n.id, color: originalColors[n.id], font: {{ color: '#1A1A2E' }} }});
-                    }});
+                    }};
+                    base.physics = {{ enabled: false }};
+                }} else if (mode === 'physics') {{
+                    base.layout = {{ hierarchical: false, improvedLayout: false, randomSeed: 42 }};
+                    base.physics = {{
+                        enabled: true, solver: 'forceAtlas2Based',
+                        forceAtlas2Based: {{
+                            gravitationalConstant: -80, centralGravity: 0.01,
+                            springLength: 180, springConstant: 0.04,
+                            damping: 0.4, avoidOverlap: 0.8,
+                        }},
+                        stabilization: {{ iterations: 300, updateInterval: 25 }},
+                    }};
+                }} else {{ /* freeze */
+                    base.layout = {{ hierarchical: false }};
+                    base.physics = {{ enabled: false }};
                 }}
-            }});
+                return base;
+            }}
 
-            function toggleLayout() {{
-                var hier = document.getElementById('hierToggle').checked;
-                var physEl = document.getElementById('physToggle');
+            function createNetwork(mode) {{
+                /* 이전 네트워크를 파괴하여 위치를 완전히 초기화 */
+                if (network) {{ network.destroy(); network = null; }}
 
-                if (hier) {{
-                    physEl.checked = false;
-                    network.setOptions({{
-                        layout: {{
-                            hierarchical: {{
-                                enabled: true,
-                                direction: 'UD',
-                                sortMethod: 'directed',
-                                levelSeparation: 120,
-                                nodeSpacing: 180,
+                /* 노드를 깊은 복사하여 vis.js가 원본을 변경하지 않도록 함 */
+                var freshNodes = JSON.parse(JSON.stringify(nodeList));
+                /* x/y를 제거하여 위치가 재계산되도록 함 */
+                freshNodes.forEach(function(n) {{ delete n.x; delete n.y; }});
+
+                var nodesDS = new vis.DataSet(freshNodes);
+                var edgesDS = new vis.DataSet(JSON.parse(JSON.stringify(edgeList)));
+                var opts = buildOptions(mode);
+
+                network = new vis.Network(container, {{ nodes: nodesDS, edges: edgesDS }}, opts);
+
+                /* 클릭 시 이웃 노드 강조 */
+                network.on("click", function(params) {{
+                    if (params.nodes.length > 0) {{
+                        var sel = params.nodes[0];
+                        var conn = network.getConnectedNodes(sel);
+                        nodesDS.get().forEach(function(n) {{
+                            if (n.id === sel || conn.indexOf(n.id) !== -1) {{
+                                nodesDS.update({{ id: n.id, color: originalColors[n.id], font: {{ color: '#1A1A2E' }} }});
+                            }} else {{
+                                nodesDS.update({{ id: n.id, color: {{ background: '#E0E0E0', border: '#CCC' }}, font: {{ color: '#CCC' }} }});
                             }}
-                        }},
-                        physics: {{ enabled: false }},
-                    }});
+                        }});
+                    }} else {{
+                        nodesDS.get().forEach(function(n) {{
+                            nodesDS.update({{ id: n.id, color: originalColors[n.id], font: {{ color: '#1A1A2E' }} }});
+                        }});
+                    }}
+                }});
+            }}
+
+            function switchMode(mode) {{
+                currentMode = mode;
+                document.getElementById('btnPhysics').className = 'mode-btn' + (mode === 'physics' ? ' active' : '');
+                document.getElementById('btnHier').className = 'mode-btn' + (mode === 'hierarchy' ? ' active' : '');
+                document.getElementById('btnFreeze').className = 'mode-btn' + (mode === 'freeze' ? ' active' : '');
+
+                if (mode === 'freeze') {{
+                    /* 물리만 비활성화하고 현재 위치 유지 */
+                    if (network) network.setOptions({{ physics: {{ enabled: false }} }});
                 }} else {{
-                    physEl.checked = true;
-                    network.setOptions({{
-                        layout: {{ hierarchical: false }},
-                        physics: {{
-                            enabled: true,
-                            solver: 'forceAtlas2Based',
-                        }},
-                    }});
+                    /* 깨끗한 레이아웃을 위해 파괴 후 재생성 */
+                    createNetwork(mode);
                 }}
             }}
 
-            function togglePhysics() {{
-                var phys = document.getElementById('physToggle').checked;
-                var hierEl = document.getElementById('hierToggle');
-                if (phys) {{
-                    hierEl.checked = false;
-                    network.setOptions({{
-                        layout: {{ hierarchical: false }},
-                        physics: {{ enabled: true }},
-                    }});
-                }} else {{
-                    network.setOptions({{ physics: {{ enabled: false }} }});
-                }}
-            }}
+            /* 초기 렌더링 */
+            createNetwork(currentMode);
         </script>
     </body>
     </html>
