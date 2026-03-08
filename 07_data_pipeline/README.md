@@ -51,7 +51,7 @@ flowchart LR
     subgraph Analysis
         ML[ML Inference]
         VIS[Visualization<br/>Jupyter / Napari]
-        VAL[Validation &<br/>QA Metrics]
+        VAL[Validation<br/>QA Metrics]
         SEG --> ML --> VIS --> VAL
     end
 

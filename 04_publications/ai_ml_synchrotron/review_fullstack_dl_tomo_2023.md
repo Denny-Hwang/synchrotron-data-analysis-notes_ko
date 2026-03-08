@@ -4,11 +4,11 @@
 
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
-| **제목**           | Deep Learning for Full-Stack Synchrotron X-Ray Tomography: From Preprocessing to Segmentation |
-| **저자**           | Wang, G.; Zhang, T.; Gao, H.; Woollard, M.; Ren, L.; Liu, H.                         |
-| **저널**           | Fundamental Research, 3(6), 1040--1052                                                 |
+| **제목**           | Towards Full-Stack Deep Learning-Empowered Data Processing Pipeline for Synchrotron Tomography Experiments |
+| **저자**           | Zhang, Z.; Li, C.; Wang, W.; Dong, Z.; Liu, G.; Dong, Y.; Zhang, Y.                         |
+| **저널**           | The Innovation, 5(1), 100539                                                 |
 | **연도**           | 2023                                                                                   |
-| **DOI**            | [10.1016/j.fmre.2023.11.003](https://doi.org/10.1016/j.fmre.2023.11.003)              |
+| **DOI**            | [10.1016/j.xinn.2023.100539](https://doi.org/10.1016/j.xinn.2023.100539)              |
 | **빔라인**         | 다기관 리뷰 (SSRF, APS, ESRF, Diamond, Swiss Light Source)                             |
 
 ---

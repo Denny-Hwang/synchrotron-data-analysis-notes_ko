@@ -4,11 +4,11 @@
 
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
-| **제목**           | Real-Time AI+HPC Workflow for Micro-Computed Tomography: Reconstruction, Denoising, and Segmentation |
-| **저자**           | McClure, M.; Bicer, T.; Kettimuthu, R.; Foster, I.; Schwarz, N.                       |
-| **저널**           | Proceedings of IEEE International Conference on Systems, Man, and Cybernetics (SMC)    |
+| **제목**           | Toward Real-Time Analysis of Synchrotron Micro-Tomography Data: Accelerating Experimental Workflows with AI and HPC |
+| **저자**           | McClure, J. E.; Yin, J.; Armstrong, R. T.; Maheshwari, K. C.; Wilkinson, S.; Vlcek, L.; Wang, Y. D.; Berrill, M. A.; Rivers, M.                       |
+| **저널**           | SMC 2020 — Smoky Mountains Comp. Sci. & Eng. Conference (Springer CCIS 1315)    |
 | **연도**           | 2020                                                                                   |
-| **DOI**            | 10.1109/SMC42975.2020.9283269                                                         |
+| **DOI**            | 10.1007/978-3-030-63393-6_15                                                         |
 | **빔라인**         | APS 2-BM (마이크로 토모그래피)                                                         |
 
 ---

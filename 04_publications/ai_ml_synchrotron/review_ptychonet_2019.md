@@ -4,11 +4,11 @@
 
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
-| **제목**           | PtychoNet: CNN-Based Ptychographic Phase Retrieval                                     |
-| **저자**           | Guan, S.; Cherukara, M. J.; Phatak, C.; Zhou, T.                                      |
-| **저널**           | Optics Express, 27(5), 6553--6566                                                      |
+| **제목**           | PtychoNet: Fast and High Quality Phase Retrieval for Ptychography                      |
+| **저자**           | Guan, Z.; Tsai, E. H. R.; Huang, X.; Yager, K. G.; Qin, H.                           |
+| **저널**           | BMVC 2019 (British Machine Vision Conference)                                          |
 | **연도**           | 2019                                                                                   |
-| **DOI**            | [10.1364/OE.27.006553](https://doi.org/10.1364/OE.27.006553)                           |
+| **DOI**            | [10.2172/1599580](https://doi.org/10.2172/1599580)                                     |
 | **빔라인**         | 시뮬레이션 기반; APS 경 X선 타이코그래피 데이터에 대해 검증                            |
 | **측정 기법**      | 타이코그래피(ptychography, 결맞음 회절 이미징)                                          |
 

@@ -4,11 +4,11 @@
 
 | 항목               | 값                                                                                     |
 |--------------------|----------------------------------------------------------------------------------------|
-| **제목**           | AI-NERD: Autonomous Identification of Non-Equilibrium Relaxation Dynamics via Unsupervised Fingerprinting |
-| **저자**           | Horwath, J. P.; Chen, X.; Lhermitte, J.; Yager, K. G.; Freychet, G.; Cosgriff, M.; Sutton, M.; Bhatt, R.; Narayanan, S.; Sandy, A.; Schwarz, N. |
+| **제목**           | AI-NERD: Elucidation of Relaxation Dynamics Beyond Equilibrium through AI-Informed X-ray Photon Correlation Spectroscopy |
+| **저자**           | Horwath, J. P.; Lin, X.-M.; He, H.; Zhang, Q.; Dufresne, E. M.; Chu, M.; Sankaranarayanan, S. K. R. S.; Chen, W.; Narayanan, S.; Cherukara, M. J. |
 | **저널**           | Nature Communications, 15                                                              |
 | **연도**           | 2024                                                                                   |
-| **DOI**            | [10.1038/s41467-024-47210-5](https://doi.org/10.1038/s41467-024-47210-5)               |
+| **DOI**            | [10.1038/s41467-024-49381-z](https://doi.org/10.1038/s41467-024-49381-z)               |
 | **빔라인**         | APS 8-ID-I (XPCS), NSLS-II 11-ID (CHX)                                                |
 
 ---

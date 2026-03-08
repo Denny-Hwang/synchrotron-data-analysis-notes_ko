@@ -35,14 +35,7 @@ from components.visjs_graph import render_visjs_graph
 
 raw_nodes, raw_edges = build_knowledge_graph()
 
-# Layout toggle via Streamlit checkbox (drives initial state)
-hier_col, info_col = st.columns([1, 3])
-with hier_col:
-    hierarchical = st.checkbox("계층적 레이아웃", value=False, key="kg_hier")
-with info_col:
-    st.caption("위의 레이아웃을 전환하거나 그래프 내 컨트롤을 사용하세요. 노드를 드래그하여 재배치, 스크롤하여 확대/축소, 클릭하여 연결 강조.")
-
-render_visjs_graph(raw_nodes, raw_edges, hierarchical=hierarchical, height=650)
+render_visjs_graph(raw_nodes, raw_edges, hierarchical=False, height=650)
 
 # ── Matrix Views ──────────────────────────────────────
 if level in ("L0", "L1", "L2"):
