@@ -70,6 +70,9 @@ EDA는 데이터 품질 문제를 조기에 발견하고 하위 분석에 직접
 | [hdf5_structure/ptychography_hdf5_schema.md](hdf5_structure/ptychography_hdf5_schema.md) | 타이코그래피 CXI 스키마 |
 | [hdf5_structure/notebooks/](hdf5_structure/notebooks/) | HDF5 탐색 및 시각화 노트북 |
 | [data_scale_analysis.md](data_scale_analysis.md) | APS-U 전후 데이터 볼륨 예측 |
+| [hdf5_deep_dive.md](hdf5_deep_dive.md) | HDF5 내부 구조: SWMR, 병렬 I/O, 청킹, 한계점 |
+| [data_formats_comparison.md](data_formats_comparison.md) | HDF5 vs Zarr vs TIFF; areaDetector, Databroker, Tiled |
+| [data_challenges_apsu.md](data_challenges_apsu.md) | APS-U 100+ TB/일: 인프라, 과제, 해결방안 |
 | [eda/](eda/) | 탐색적 데이터 분석 가이드 및 노트북 |
 | [eda/xrf_eda.md](eda/xrf_eda.md) | XRF 전용 EDA 기법 |
 | [eda/tomo_eda.md](eda/tomo_eda.md) | 단층촬영 전용 EDA 기법 |
@@ -80,10 +83,13 @@ EDA는 데이터 품질 문제를 조기에 발견하고 하위 분석에 직접
 ## 권장 읽기 순서
 
 1. [hdf5_structure/README.md](hdf5_structure/README.md)에서 형식 기본 사항부터 시작
-2. 관심 있는 모달리티의 스키마 파일 탐색
-3. HDF5 탐색 노트북을 실행하여 실습 경험 습득
-4. [data_scale_analysis.md](data_scale_analysis.md)에서 데이터 볼륨에 대한 맥락 파악
-5. 데이터 처리 전에 해당 모달리티의 EDA 가이드 따르기
+2. [hdf5_deep_dive.md](hdf5_deep_dive.md)에서 SWMR, 병렬 I/O, 성능 튜닝 심화 학습
+3. [data_formats_comparison.md](data_formats_comparison.md)에서 형식 비교 (HDF5 vs Zarr vs TIFF)
+4. 관심 있는 모달리티의 스키마 파일 탐색
+5. HDF5 탐색 노트북을 실행하여 실습 경험 습득
+6. [data_scale_analysis.md](data_scale_analysis.md)에서 데이터 볼륨에 대한 맥락 파악
+7. [data_challenges_apsu.md](data_challenges_apsu.md)에서 APS-U 데이터 과제 이해
+8. 데이터 처리 전에 해당 모달리티의 EDA 가이드 따르기
 
 ## 관련 디렉토리
 
