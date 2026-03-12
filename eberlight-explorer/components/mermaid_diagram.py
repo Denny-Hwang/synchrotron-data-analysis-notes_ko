@@ -25,7 +25,7 @@ def render_mermaid(mermaid_code: str, height: int = 400):
     diagram_id = "mermaid_" + hashlib.md5(code.encode()).hexdigest()[:8]
 
     html = f"""
-    <div style="background: white; border-radius: 8px; padding: 16px; border: 1px solid #E8EEF6;">
+    <div style="background: white; border-radius: 8px; padding: 16px; border: 1px solid #E8EEF6; overflow: visible;">
         <div id="{diagram_id}" class="mermaid">
 {code}
         </div>
@@ -48,8 +48,11 @@ def render_mermaid(mermaid_code: str, height: int = 400):
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'basis'
+            }},
+            sequence: {{
+                useMaxWidth: true
             }}
         }});
     </script>
     """
-    components.html(html, height=height, scrolling=False)
+    components.html(html, height=height, scrolling=True)

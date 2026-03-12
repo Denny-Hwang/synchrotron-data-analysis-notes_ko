@@ -22,8 +22,17 @@ def render_content(content: str):
         else:
             # Mermaid diagram code
             lines = part.strip().split("\n")
-            height = max(300, len(lines) * 35 + 100)
-            render_mermaid(part, height=min(height, 800))
+            # Use higher multiplier for complex diagrams (subgraphs, sequences)
+            has_subgraph = any("subgraph" in l for l in lines)
+            has_sequence = any("sequenceDiagram" in l or "participant" in l for l in lines)
+            if has_subgraph:
+                multiplier = 55
+            elif has_sequence:
+                multiplier = 45
+            else:
+                multiplier = 40
+            height = max(350, len(lines) * multiplier + 150)
+            render_mermaid(part, height=height)
 
 
 def render_markdown(file_path: str, show_title: bool = True):

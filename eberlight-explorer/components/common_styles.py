@@ -46,6 +46,11 @@ COMMON_CSS = """
     div[data-testid="stVerticalBlockBorderWrapper"] > div[data-testid="stVerticalBlock"] {
         gap: 0.5rem;
     }
+
+    /* Prevent diagram/figure clipping in iframes and expanders */
+    iframe { border: none; }
+    div[data-testid="stExpander"] div[data-testid="stVerticalBlock"] { overflow: visible; }
+    .stMarkdown img, .stImage img { max-width: 100%; height: auto; }
 </style>
 """
 
