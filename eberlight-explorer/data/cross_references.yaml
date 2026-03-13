@@ -4,20 +4,25 @@ modality_method:
   ptychography: [reconstruction, multimodal_integration]
   crystallography: [image_segmentation]
   spectroscopy: [multimodal_integration, autonomous_experiment]
-  scattering: []
+  scattering: [autonomous_experiment]
 
 method_paper:
   tomogan: [review_tomogan_2020]
-  roi_finder: [review_roi_finder_2022]
-  xrf_gmm: [review_xrf_gmm_2013]
-  ptychonet: [review_ptychonet_2019]
   deep_residual_xrf: [review_deep_residual_xrf_2023]
+  noise2noise: []
+  unet_variants: []
+  tomo_segmentation: [review_fullstack_dl_tomo_2023]
+  xrf_cell_seg: [review_xrf_gmm_2013]
+  ptychonet: [review_ptychonet_2019]
+  tomocupy: [review_realtime_uct_hpc_2020]
+  inr_dynamic: []
   ai_nerd: [review_ai_nerd_2024]
-  aiedge_ptycho: [review_aiedge_ptycho_2023, review_ai_edge_ptychography_2023]
-  fullstack_tomo: [review_fullstack_dl_tomo_2023, review_fullstack_tomo_2023]
-  realtime_hpc: [review_realtime_uct_hpc_2020]
-  alphafold: [review_alphafold_2021]
+  roi_finder: [review_roi_finder_2022]
+  bayesian_opt: [review_aidriven_xanes_2025]
   ki_bo_xanes: [review_aidriven_xanes_2025]
+  xrf_ptychography: []
+  ct_xas: []
+  optical_xray: []
 
 tool_pipeline_stage:
   bluesky_epics: acquisition

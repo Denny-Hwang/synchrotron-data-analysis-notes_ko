@@ -1,100 +1,84 @@
 sections:
-  - id: "01_program_overview"
-    title: "프로그램 개요"
+  - id: 01
+    name: "프로그램 개요"
     icon: "🏠"
-    description: "eBERlight 프로그램 미션, APS 시설, 빔라인, 파트너, 연구 분야"
-    files:
-      - path: "01_program_overview/README.md"
-        title: "미션 및 개요"
-        level: L1
-        tags: [overview, mission, BER, DOE]
-      - path: "01_program_overview/aps_facility.md"
-        title: "APS 시설"
-        level: L2
-        tags: [APS, facility, APS-U, upgrade]
-      - path: "01_program_overview/beamlines.md"
-        title: "빔라인"
-        level: L2
-        tags: [beamline, facility]
-      - path: "01_program_overview/partner_facilities.md"
-        title: "파트너 시설"
-        level: L2
-        tags: [NSLS-II, SSRL, partners]
-      - path: "01_program_overview/research_domains.md"
-        title: "연구 분야"
-        level: L2
-        tags: [biology, environment, soil, plant, microbiome]
+    description: "eBERlight 프로그램 미션, APS 시설 세부사항, 빔라인, 파트너 기관"
+    topics:
+      - "프로그램 미션 및 목표"
+      - "APS 시설 및 빔라인"
+      - "파트너 시설"
+      - "연구 분야 (생물학, 환경, 토양, 식물, 마이크로바이옴)"
 
-  - id: "02_xray_modalities"
-    title: "X선 모달리티"
+  - id: 02
+    name: "X선 모달리티"
     icon: "🔬"
     description: "APS 빔라인에서 사용되는 6가지 X선 측정 기법"
-    files:
-      - path: "02_xray_modalities/README.md"
-        title: "모달리티 개요"
-        level: L1
-        tags: [modality, X-ray, overview]
+    topics:
+      - "토모그래피"
+      - "X선 형광 (XRF)"
+      - "타이코그래피"
+      - "결정학"
+      - "분광학 (XANES, EXAFS)"
+      - "산란 (SAXS, WAXS, XPCS)"
 
-  - id: "03_ai_ml_methods"
-    title: "AI/ML 방법"
+  - id: 03
+    name: "AI/ML 방법"
     icon: "🤖"
-    description: "싱크로트론 데이터 분석에 적용되는 머신러닝 및 AI 방법"
-    files:
-      - path: "03_ai_ml_methods/README.md"
-        title: "AI/ML 개요"
-        level: L1
-        tags: [AI, ML, deep-learning, overview]
+    description: "싱크로트론 데이터 분석을 위한 머신러닝 및 인공지능 접근법"
+    topics:
+      - "지도 학습 (CNN, ResNets)"
+      - "비지도 학습 (클러스터링, 차원 축소)"
+      - "자율 실험 (베이지안 최적화, 능동 학습)"
+      - "실시간 데이터 처리 및 엣지 컴퓨팅"
 
-  - id: "04_publications"
-    title: "출판물"
+  - id: 04
+    name: "출판물"
     icon: "📚"
-    description: "싱크로트론 AI/ML 연구를 위한 논문 리뷰 및 출판물 아카이브"
-    files:
-      - path: "04_publications/README.md"
-        title: "출판물 개요"
-        level: L1
-        tags: [publications, review, papers]
-      - path: "04_publications/ber_program_publications.md"
-        title: "BER 프로그램 출판물"
-        level: L2
-        tags: [BER, publications]
+    description: "싱크로트론 기반 AI/ML 응용에 초점을 맞춘 논문 리뷰 및 연구 아카이브"
+    topics:
+      - "AI/ML 논문 리뷰 (14편, 2013-2025)"
+      - "BER 프로그램 출판물"
+      - "워크숍 보고서"
 
-  - id: "05_tools_and_code"
-    title: "도구 및 코드"
+  - id: 05
+    name: "도구 및 코드"
     icon: "🛠️"
-    description: "싱크로트론 데이터 처리를 위한 오픈소스 도구 및 소프트웨어"
-    files:
-      - path: "05_tools_and_code/README.md"
-        title: "도구 개요"
-        level: L1
-        tags: [tools, software, open-source]
+    description: "싱크로트론 데이터 처리 워크플로우를 위한 오픈소스 소프트웨어 및 도구"
+    topics:
+      - "TomoCuPy (토모그래피 처리)"
+      - "TomoPy (토모그래피 재구성)"
+      - "Bluesky/EPICS (빔라인 제어)"
+      - "MAPS (XRF 데이터 처리)"
+      - "ROI-Finder (자동 분할)"
+      - "MLExchange (ML 인프라)"
 
-  - id: "06_data_structures"
-    title: "데이터 구조"
+  - id: 06
+    name: "데이터 구조"
     icon: "📊"
     description: "HDF5 스키마, 데이터 규모 분석, 탐색적 데이터 분석"
-    files:
-      - path: "06_data_structures/README.md"
-        title: "데이터 구조 개요"
-        level: L1
-        tags: [data, HDF5, schema]
+    topics:
+      - "HDF5 데이터 구성"
+      - "NeXus 표준"
+      - "데이터 규모 및 I/O 최적화"
+      - "탐색적 데이터 분석 (EDA)"
 
-  - id: "07_data_pipeline"
-    title: "데이터 파이프라인"
+  - id: 07
+    name: "데이터 파이프라인"
     icon: "🔄"
-    description: "수집부터 저장까지의 엔드투엔드 데이터 파이프라인"
-    files:
-      - path: "07_data_pipeline/README.md"
-        title: "파이프라인 개요"
-        level: L1
-        tags: [pipeline, acquisition, streaming, processing]
+    description: "데이터 수집부터 최종 저장까지의 완전한 워크플로우"
+    topics:
+      - "수집 (빔라인 제어, 검출기 판독)"
+      - "스트리밍 (실시간 데이터 전송)"
+      - "처리 (재구성, 노이즈 제거)"
+      - "분석 (분할, 분류)"
+      - "저장 (아카이빙, 데이터 관리)"
 
-  - id: "08_references"
-    title: "참고자료"
+  - id: 08
+    name: "참고자료"
     icon: "🔗"
-    description: "참고문헌, 용어집, 유용한 링크"
-    files:
-      - path: "08_references/README.md"
-        title: "참고자료 개요"
-        level: L1
-        tags: [references, bibliography, glossary]
+    description: "참고문헌, 용어 정의, 관련 자료"
+    topics:
+      - "참고문헌"
+      - "용어집 및 용어"
+      - "웹 자료 및 외부 링크"
+      - "시설 문서"

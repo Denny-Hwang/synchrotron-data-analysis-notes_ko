@@ -31,7 +31,7 @@
 
 ---
 
-## 논문 리뷰 (총 10편)
+## 논문 리뷰 (총 14편)
 
 모든 리뷰는 `ai_ml_synchrotron/`에 있으며 템플릿을 따릅니다. 빠른 탐색을 위해
 주요 주제별로 정리되어 있습니다.
@@ -54,32 +54,41 @@
 | # | 파일 | 약칭 | 연도 |
 |---|------|------|------|
 | 4 | `ai_ml_synchrotron/review_ai_nerd_2024.md` | AI-NERD: 비지도 XPCS 핑거프린팅 | 2024 |
+| 5 | `ai_ml_synchrotron/review_aidriven_xanes_2025.md` | AI 기반 동적 XANES 워크플로우 | 2025 |
 
 ### 타이코그래피
 
 | # | 파일 | 약칭 | 연도 |
 |---|------|------|------|
-| 5 | `ai_ml_synchrotron/review_ai_edge_ptychography_2023.md` | 실시간 엣지 타이코그래피 이미징 | 2023 |
-| 6 | `ai_ml_synchrotron/review_ptychonet_2019.md` | PtychoNet: CNN 위상 복원 | 2019 |
+| 6 | `ai_ml_synchrotron/review_aiedge_ptycho_2023.md` | 실시간 엣지 타이코그래피 | 2023 |
+| 7 | `ai_ml_synchrotron/review_ai_edge_ptychography_2023.md` | AI 엣지 타이코그래피 (확장 리뷰) | 2023 |
+| 8 | `ai_ml_synchrotron/review_ptychonet_2019.md` | PtychoNet: CNN 위상 복원 | 2019 |
 
 ### 해상도 향상
 
 | # | 파일 | 약칭 | 연도 |
 |---|------|------|------|
-| 7 | `ai_ml_synchrotron/review_deep_residual_xrf_2023.md` | XRF 해상도를 위한 심층 잔차 네트워크 | 2023 |
+| 9 | `ai_ml_synchrotron/review_deep_residual_xrf_2023.md` | XRF 해상도를 위한 심층 잔차 네트워크 | 2023 |
 
 ### 전체 파이프라인 / 인프라
 
 | # | 파일 | 약칭 | 연도 |
 |---|------|------|------|
-| 8 | `ai_ml_synchrotron/review_fullstack_dl_tomo_2023.md` | 토모그래피를 위한 풀스택 DL 파이프라인 | 2023 |
-| 9 | `ai_ml_synchrotron/review_realtime_uct_hpc_2020.md` | 마이크로-CT를 위한 실시간 AI+HPC | 2020 |
+| 10 | `ai_ml_synchrotron/review_fullstack_dl_tomo_2023.md` | 토모그래피를 위한 풀스택 DL 파이프라인 | 2023 |
+| 11 | `ai_ml_synchrotron/review_fullstack_tomo_2023.md` | 풀스택 토모그래피 (확장 리뷰) | 2023 |
+| 12 | `ai_ml_synchrotron/review_realtime_uct_hpc_2020.md` | 마이크로-CT를 위한 실시간 AI+HPC | 2020 |
+
+### 구조 생물학
+
+| # | 파일 | 약칭 | 연도 |
+|---|------|------|------|
+| 13 | `ai_ml_synchrotron/review_alphafold_2021.md` | AlphaFold & 구조 생물학 | 2021 |
 
 ### 워크숍 보고서 및 서베이
 
 | # | 파일 | 약칭 | 연도 |
 |---|------|------|------|
-| 10 | `ai_ml_synchrotron/review_ai_als_workshop_2024.md` | AI@ALS 워크숍 보고서 | 2024 |
+| 14 | `ai_ml_synchrotron/review_ai_als_workshop_2024.md` | AI@ALS 워크숍 보고서 | 2024 |
 
 ---
 
@@ -116,4 +125,4 @@
 ## 관리자
 
 - APS BER 프로그램 AI/ML 팀, Argonne National Laboratory
-- 최종 업데이트: 2025-Q4
+- 최종 업데이트: 2026-Q1
