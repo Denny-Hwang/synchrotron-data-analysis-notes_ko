@@ -2,6 +2,18 @@
 
 이 프로젝트의 주요 변경 사항을 이 파일에 기록합니다.
 
+## [1.2.0] - 2026-03-13
+
+### 변경
+
+#### README 재작성 및 Explorer 가이드 추가
+- README.md 전면 재작성: Explorer 설치/실행 가이드, 난이도 레벨(L0-L2) 설명, 확장된 빠른 시작 가이드, 주요 자료 테이블 추가
+- 출판물 아카이브 14편으로 확장: AI 기반 XANES(Du et al. 2025), AlphaFold(Jumper et al. 2021), 풀스택 토모그래피 확장 리뷰, AI 엣지 타이코그래피 확장 리뷰 반영
+- 04_publications/README.md 및 ai_ml_synchrotron/README.md에 누락된 4편 추가 및 카테고리 재정리
+- 교차 참조(cross_references.yaml) 업데이트: scattering 모달리티에 autonomous_experiment 추가, 누락된 method_paper 항목 보완
+- 콘텐츠 인덱스(content_index.yaml) 구조 원본 저장소와 동기화
+- CHANGELOG 최종 업데이트 날짜 2026-Q1로 갱신
+
 ## [1.1.0] - 2026-03-06
 
 ### 추가
@@ -51,7 +63,7 @@
 #### 5단계: 출판물 아카이브 (04_publications/)
 - 논문 리뷰 템플릿
 - BER 프로그램 출판물 개요
-- ROI-Finder, TomoGAN, XRF GMM, AI-NERD, PtychoNet, AI@Edge 타이코그래피, 딥 잔차 XRF, 풀스택 DL 토모, 실시간 µCT HPC, AI@ALS 워크숍을 다루는 10개의 상세 논문 리뷰
+- ROI-Finder, TomoGAN, XRF GMM, AI-NERD, PtychoNet, AI@Edge 타이코그래피, 딥 잔차 XRF, 풀스택 DL 토모, 실시간 µCT HPC, AI@ALS 워크숍, AI 기반 XANES, AlphaFold를 다루는 14개의 상세 논문 리뷰
 
 #### 6단계: 도구 및 코드 리버스 엔지니어링 (05_tools_and_code/)
 - ROI-Finder: 리버스 엔지니어링, 장단점, 재현 가이드, 4개 Jupyter 노트북
