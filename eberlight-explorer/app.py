@@ -142,9 +142,9 @@ if level in ("L0", "L1"):
     for i, section in enumerate(index["sections"]):
         with section_cols[i % 4]:
             with st.container(border=True):
-                st.markdown(f"### {section['icon']} {section['title']}")
+                st.markdown(f"### {section['icon']} {section['name']}")
                 st.markdown(section["description"])
-                st.markdown(f"`{len(section['files'])}개 파일`")
+                st.markdown(f"`{len(section['topics'])}개 주제`")
 
 if level in ("L1", "L2"):
     # 모달리티 비교 테이블
