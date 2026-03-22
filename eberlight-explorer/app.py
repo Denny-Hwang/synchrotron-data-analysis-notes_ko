@@ -81,7 +81,8 @@ st.sidebar.markdown(
     "- 📚 **논문** — 리뷰된 출판물\n"
     "- 🛠️ **도구** — 소프트웨어 생태계\n"
     "- 🔄 **파이프라인** — 데이터 흐름\n"
-    "- 📊 **데이터** — 스키마 및 EDA"
+    "- 📊 **데이터** — 스키마 및 EDA\n"
+    "- 📡 **노이즈 카탈로그** — 29종 아티팩트"
 )
 st.sidebar.markdown("---")
 level = render_level_selector()
