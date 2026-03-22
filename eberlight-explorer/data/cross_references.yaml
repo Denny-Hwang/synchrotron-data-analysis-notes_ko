@@ -24,6 +24,18 @@ method_paper:
   ct_xas: []
   optical_xray: []
 
+modality_noise:
+  tomography: [ring_artifact, zinger, streak_artifact, low_dose_noise, sparse_angle_artifact, motion_artifact, flatfield_issues, rotation_center_error, beam_intensity_drop]
+  xrf_microscopy: [photon_counting_noise, dead_hot_pixel, peak_overlap, self_absorption, dead_time_saturation, i0_normalization, probe_blurring, scan_stripe]
+  spectroscopy: [statistical_noise_exafs, energy_calibration_drift, harmonics_contamination, self_absorption_xas, radiation_damage, outlier_spectra]
+  ptychography: [partial_coherence, position_error, stitching_artifact]
+  cross_cutting: [detector_common_issues, dl_hallucination, rechunking_data_integrity]
+
+noise_method:
+  low_dose_noise: [tomogan, noise2noise]
+  probe_blurring: [deep_residual_xrf]
+  dl_hallucination: [tomogan, noise2noise, unet_variants]
+
 tool_pipeline_stage:
   bluesky_epics: acquisition
   tomocupy: processing
