@@ -1,28 +1,28 @@
-# Bias Field (Intensity Inhomogeneity)
+# 바이어스 필드(Bias Field, 강도 불균일성)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | Medical MRI / Synchrotron Imaging |
-| **Noise Type** | Instrumental |
-| **Severity** | Major |
-| **Frequency** | Common |
-| **Detection Difficulty** | Moderate |
-| **Origin Domain** | Medical Imaging (MRI) |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | 의료 MRI / 방사광 영상 |
+| **노이즈 유형** | 기기(Instrumental) |
+| **심각도** | 주요(Major) |
+| **빈도** | 흔함(Common) |
+| **탐지 난이도** | 보통(Moderate) |
+| **기원 도메인** | 의료 영상(MRI) |
 
-## Description
+## 설명
 
-Bias field (also called intensity inhomogeneity, shading, or RF inhomogeneity in MRI) is a smooth, low-frequency spatial variation in image intensity that is unrelated to the actual tissue/material properties. In MRI it comes from non-uniform RF coil sensitivity; in synchrotron imaging, analogous effects arise from non-uniform beam profile, detector response non-uniformity, and illumination gradients.
+바이어스 필드(강도 불균일성, 셰이딩, 또는 MRI에서의 RF 불균일성으로도 불림)는 실제 조직/물질 특성과 무관한 매끄럽고 저주파의 공간적 강도 변화입니다. MRI에서는 RF 코일 감도의 비균일성에서 비롯되며, 방사광 영상에서는 비균일한 빔 프로파일, 검출기 응답 불균일성, 조명 그래디언트로부터 유사한 효과가 발생합니다.
 
-## Root Cause
+## 근본 원인
 
-- **MRI origin:** Non-uniform B1 (RF) transmit/receive field → spatially varying flip angle and signal intensity
-- **Synchrotron analog:** Non-uniform beam profile (Gaussian/top-hat imperfections), scintillator non-uniformity, lens vignetting
-- Low-frequency multiplicative modulation: `I_observed(x) = I_true(x) × B(x) + noise`
-- Compounds segmentation errors and quantitative measurements
+- **MRI 기원:** 비균일한 B1(RF) 송신/수신 장 → 공간적으로 변하는 플립 각도와 신호 강도
+- **방사광 유사 사례:** 비균일한 빔 프로파일(Gaussian/top-hat 불완전성), 섬광체(scintillator) 불균일, 렌즈 비네팅(vignetting)
+- 저주파 곱셈 변조: `I_observed(x) = I_true(x) × B(x) + noise`
+- 세분화 오류 및 정량 측정 오차를 가중시킴
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -46,15 +46,15 @@ def detect_bias_field(image_2d, object_mask, block_size=64):
     return cv
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Smooth brightness gradient across the image
-- Same material appears darker in one region than another
-- Segmentation thresholds fail globally but work locally
+- 이미지 전반에 걸친 매끄러운 밝기 그래디언트
+- 동일 물질이 영역에 따라 더 어둡게 나타남
+- 세분화 임계값이 전역적으로는 실패하지만 국소적으로는 동작함
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -69,14 +69,14 @@ def estimate_bias_field(image_2d, sigma=50):
     return bias_field
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Traditional Approaches
+### 전통적 접근법
 
-1. **N4ITK (ANTs):** Industry-standard iterative bias field correction (Tustison et al., 2010)
-2. **Homomorphic filtering:** Log transform → high-pass filter → exponential (removes multiplicative bias)
-3. **Surface fitting:** Fit low-order polynomial to background/reference regions
-4. **Flat-field normalization:** Divide by separately acquired uniform-illumination image
+1. **N4ITK (ANTs):** 산업 표준 반복 바이어스 필드 보정 (Tustison et al., 2010)
+2. **호모모픽(Homomorphic) 필터링:** 로그 변환 → 고주파 통과 필터 → 지수화 (곱셈 바이어스 제거)
+3. **표면 적합:** 배경/참조 영역에 저차 다항식 적합
+4. **플랫필드 정규화:** 별도로 획득한 균일 조명 이미지로 나누기
 
 ```python
 def homomorphic_bias_correction(image_2d, cutoff=0.05):
@@ -92,30 +92,30 @@ def homomorphic_bias_correction(image_2d, cutoff=0.05):
     return corrected
 ```
 
-### AI/ML Approaches
+### AI/ML 접근법
 
-- **DeepN4:** Learning-based bias field estimation (faster than iterative N4)
-- **Joint segmentation-correction networks:** Simultaneously segment and correct bias
+- **DeepN4:** 학습 기반 바이어스 필드 추정 (반복적 N4보다 빠름)
+- **공동 세분화-보정 네트워크:** 세분화와 바이어스 보정을 동시에 수행
 
-## Key References
+## 주요 참고문헌
 
-- **Tustison et al. (2010)** — "N4ITK: Improved N3 Bias Correction" — gold standard tool
-- **Sled et al. (1998)** — "N3: Nonparametric Noncuniformity Normalization" — original N3 algorithm
+- **Tustison et al. (2010)** — "N4ITK: Improved N3 Bias Correction" — 표준 도구
+- **Sled et al. (1998)** — "N3: Nonparametric Noncuniformity Normalization" — 원조 N3 알고리즘
 - **Vovk et al. (2007)** — "A review of methods for correction of intensity inhomogeneity in MRI"
-- **SimpleITK** — N4BiasFieldCorrectionImageFilter implementation
+- **SimpleITK** — N4BiasFieldCorrectionImageFilter 구현
 
-## Relevance to Synchrotron Data
+## 방사광 데이터와의 관련성
 
-| Scenario | Relevance |
-|----------|-----------|
-| Flat-field correction residuals | Imperfect flat-field leaves multiplicative bias |
-| Beam profile non-uniformity | Gaussian or structured beam → center-to-edge gradient |
-| XRF scan normalization | Beam intensity variation across scan area |
-| Full-field microscopy | Lens vignetting, scintillator non-uniformity |
-| Multi-tile stitching | Illumination mismatch between tiles |
+| 시나리오 | 관련성 |
+|----------|--------|
+| 플랫필드 보정 잔차 | 불완전한 플랫필드는 곱셈 바이어스를 남김 |
+| 빔 프로파일 불균일 | Gaussian 또는 구조화된 빔 → 중심-가장자리 그래디언트 |
+| XRF 스캔 정규화 | 스캔 영역에 걸친 빔 강도 변화 |
+| 전체 시야 현미경 | 렌즈 비네팅, 섬광체 불균일 |
+| 다중 타일 스티칭 | 타일 간 조명 불일치 |
 
-## Related Resources
+## 관련 자료
 
-- [Flat-field issues](../tomography/flatfield_issues.md) — Primary synchrotron correction for illumination non-uniformity
-- [I0 normalization](../xrf_microscopy/i0_normalization.md) — Beam intensity correction in XRF
-- [Scan stripe](../xrf_microscopy/scan_stripe.md) — Row-by-row variant of intensity inhomogeneity
+- [Flat-field issues](../tomography/flatfield_issues.md) — 조명 불균일에 대한 주요 방사광 보정
+- [I0 normalization](../xrf_microscopy/i0_normalization.md) — XRF에서의 빔 강도 보정
+- [Scan stripe](../xrf_microscopy/scan_stripe.md) — 행 단위 강도 불균일 변형

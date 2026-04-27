@@ -1,35 +1,35 @@
-# Parasitic Scattering (SAXS/WAXS)
+# 기생 산란(Parasitic Scattering, SAXS/WAXS)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | SAXS / WAXS |
-| **Noise Type** | Instrumental |
-| **Severity** | Critical |
-| **Frequency** | Always |
-| **Detection Difficulty** | Moderate |
-| **Origin Domain** | Synchrotron Scattering (ESRF, DESY, Diamond, SPring-8) |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | SAXS / WAXS |
+| **노이즈 유형** | 기기(Instrumental) |
+| **심각도** | 심각(Critical) |
+| **빈도** | 항상(Always) |
+| **탐지 난이도** | 보통(Moderate) |
+| **기원 도메인** | 방사광 산란(ESRF, DESY, Diamond, SPring-8) |
 
-## Visual Examples
+## 시각적 예시
 
-![Before and after — parasitic scattering](../images/parasitic_scattering_before_after.png)
+![보정 전후 — 기생 산란](../images/parasitic_scattering_before_after.png)
 
-> **Image source:** Synthetic SAXS I(q) curve with simulated parasitic scattering at low q. Left: steep upturn from slit/window scatter. Right: after buffer subtraction revealing true Guinier region. MIT license.
+> **이미지 출처:** 저-q 영역에 시뮬레이션된 기생 산란을 가진 합성 SAXS I(q) 곡선. 왼쪽: 슬릿/윈도우 산란으로 인한 가파른 상승. 오른쪽: 버퍼 차감 후 진정한 Guinier 영역이 드러남. MIT 라이선스.
 
-## Description
+## 설명
 
-Parasitic scattering is unwanted background signal from X-ray interactions with optical components (slits, windows, air gaps, beamstop) rather than the sample. In SAXS, this is the dominant noise source at low-q, where the scientific signal of interest (large-scale structures) overlaps with scattering from beam-defining slits and windows. Proper subtraction of parasitic scatter is essential for reliable structural analysis.
+기생 산란(Parasitic scattering)은 시료가 아닌 광학 부품(슬릿, 윈도우, 공기 갭, 빔스톱)과의 X선 상호작용에서 발생하는 원치 않는 배경 신호입니다. SAXS에서는 저-q 영역의 지배적인 노이즈 원천이며, 관심 있는 과학적 신호(대규모 구조)가 빔 정의 슬릿과 윈도우의 산란과 겹칩니다. 신뢰할 수 있는 구조 분석을 위해서는 기생 산란의 적절한 차감이 필수적입니다.
 
-## Root Cause
+## 근본 원인
 
-- **Slit scattering:** X-rays hitting slit edges produce divergent scatter at low angles
-- **Window scattering:** Kapton, mica, or diamond windows contribute broad background
-- **Air scattering:** Any air path length adds diffuse background (N₂, O₂ scattering)
-- **Beamstop scatter:** Beam stop and its support wire scatter at low q
-- **Flight tube imperfections:** Residual gas in vacuum path, window fogging
+- **슬릿 산란:** 슬릿 가장자리에 부딪힌 X선이 저각도에서 발산 산란을 생성
+- **윈도우 산란:** Kapton, mica 또는 diamond 윈도우가 광범위한 배경 기여
+- **공기 산란:** 모든 공기 경로 길이가 확산 배경을 더함(N₂, O₂ 산란)
+- **빔스톱 산란:** 빔스톱과 그 지지선이 저-q에서 산란
+- **비행 튜브 결함:** 진공 경로 내 잔류 가스, 윈도우 흐림
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -48,16 +48,16 @@ def check_parasitic_scatter(q, I_sample, I_buffer, I_empty):
     return ratio
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Steep upturn in I(q) at very low q (below sample's true Guinier region)
-- Background shape changes with slit settings but not with sample
-- Asymmetric 2D pattern (parasitic scatter follows slit geometry)
-- Signal persists even with no sample in beam
+- 매우 낮은 q에서 I(q)의 가파른 상승(시료의 진정한 Guinier 영역 아래)
+- 배경 모양이 시료가 아닌 슬릿 설정에 따라 변화
+- 비대칭 2D 패턴(기생 산란이 슬릿 기하를 따름)
+- 빔 내 시료가 없어도 신호가 지속됨
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -72,15 +72,15 @@ def parasitic_slope_test(q, I_q, q_min=0.005, q_max=0.02):
     return slope
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Traditional Approaches
+### 전통적 접근
 
-1. **Empty beam / buffer subtraction:** Measure empty cell + buffer, subtract from sample
-2. **Guard slits:** Second slit set to intercept parasitic scatter from primary slits
-3. **Scatterless slits:** Single-crystal (Ge/Si) slits that don't produce parasitic scatter
-4. **Vacuum flight tube:** Eliminate air scattering with evacuated path
-5. **Azimuthal masking:** Mask non-isotropic parasitic features in 2D pattern
+1. **빈 빔 / 버퍼 차감:** 빈 셀 + 버퍼를 측정하여 시료에서 차감
+2. **가드 슬릿:** 1차 슬릿의 기생 산란을 차단하는 2차 슬릿 세트
+3. **무산란 슬릿(Scatterless slits):** 기생 산란을 발생시키지 않는 단결정(Ge/Si) 슬릿
+4. **진공 비행 튜브:** 비워진 경로로 공기 산란 제거
+5. **방위각 마스킹:** 2D 패턴에서 비등방성 기생 특징 마스킹
 
 ```python
 def saxs_background_subtraction(I_sample, I_buffer, I_empty,
@@ -91,43 +91,43 @@ def saxs_background_subtraction(I_sample, I_buffer, I_empty,
     return I_corrected
 ```
 
-### Software Tools
+### 소프트웨어 도구
 
-- **SASView / sasmodels** — Comprehensive SAXS/SANS analysis with background handling
-- **ATSAS (EMBL)** — PRIMUS, GNOM with automatic background estimation
-- **pyFAI** — Fast azimuthal integration with masking support (ESRF)
-- **Dawn Science** — Diamond Light Source processing pipeline
+- **SASView / sasmodels** — 배경 처리를 포함한 종합 SAXS/SANS 분석
+- **ATSAS (EMBL)** — 자동 배경 추정 기능을 갖춘 PRIMUS, GNOM
+- **pyFAI** — 마스킹을 지원하는 빠른 방위각 적분(ESRF)
+- **Dawn Science** — Diamond Light Source 처리 파이프라인
 
-## Key References
+## 주요 참고문헌
 
-- **Glatter & Kratky (1982)** — "Small Angle X-ray Scattering" — foundational textbook
+- **Glatter & Kratky (1982)** — "Small Angle X-ray Scattering" — 기초 교과서
 - **Pauw (2013)** — "Everything SAXS: small-angle scattering pattern collection and correction"
 - **Li et al. (2008)** — "Scatterless hybrid metal–single-crystal slit for SAXS"
-- **ESRF ID02 beamline documentation** — Parasitic scatter mitigation strategies
+- **ESRF ID02 beamline documentation** — 기생 산란 완화 전략
 
-## Facility Benchmarks
+## 시설별 벤치마크
 
-| Facility | Beamline | Approach |
-|----------|----------|----------|
-| ESRF | ID02 | Scatterless slits + 34m vacuum path |
-| DESY PETRA III | P12 (EMBL) | Automated buffer subtraction pipeline |
-| Diamond | I22 | Guard slits + evacuated camera |
-| SPring-8 | BL40B2 | Precision slit system + He path |
-| APS | 12-ID-B | Pinhole collimation + vacuum |
+| 시설 | 빔라인 | 접근법 |
+|------|--------|--------|
+| ESRF | ID02 | 무산란 슬릿 + 34m 진공 경로 |
+| DESY PETRA III | P12 (EMBL) | 자동화된 버퍼 차감 파이프라인 |
+| Diamond | I22 | 가드 슬릿 + 진공 카메라 |
+| SPring-8 | BL40B2 | 정밀 슬릿 시스템 + He 경로 |
+| APS | 12-ID-B | 핀홀 콜리메이션 + 진공 |
 
-## Real-World Before/After Examples
+## 실제 보정 전후 예시
 
-The following published sources provide real experimental before/after comparisons:
+다음 출판된 자료들은 실제 실험적 보정 전후 비교를 제공합니다:
 
-| Source | Type | Figure/Location | Description | License |
-|--------|------|-----------------|-------------|---------|
-| [Ashiotis et al. 2015 — pyFAI](https://doi.org/10.1107/S1600576715004306) | Paper | Multiple | pyFAI: a Python library for high performance azimuthal integration — azimuthal integration with masking examples for parasitic scatter removal | MIT |
-| [pyFAI documentation](https://pyfai.readthedocs.io/) | Software docs | Tutorials | pyFAI azimuthal integration tutorials showing masking of parasitic scattering and beamstop shadows | MIT |
+| 출처 | 유형 | 그림/위치 | 설명 | 라이선스 |
+|------|------|----------|------|---------|
+| [Ashiotis et al. 2015 — pyFAI](https://doi.org/10.1107/S1600576715004306) | 논문 | 다수 | pyFAI: 고성능 방위각 적분을 위한 Python 라이브러리 — 기생 산란 제거를 위한 마스킹 적분 예시 | MIT |
+| [pyFAI documentation](https://pyfai.readthedocs.io/) | 소프트웨어 문서 | 튜토리얼 | 기생 산란 및 빔스톱 그림자 마스킹을 보여주는 pyFAI 방위각 적분 튜토리얼 | MIT |
 
-**Key references with published before/after comparisons:**
-- **Ashiotis et al. (2015)**: pyFAI azimuthal integration with masking examples showing parasitic scatter removal. DOI: 10.1107/S1600576715004306
+**출판된 보정 전후 비교를 포함한 주요 참고문헌:**
+- **Ashiotis et al. (2015)**: 기생 산란 제거를 보여주는 pyFAI 방위각 적분 마스킹 예시. DOI: 10.1107/S1600576715004306
 
-## Related Resources
+## 관련 자료
 
-- [Scatter artifact](../medical_imaging/scatter_artifact.md) — Scatter in CT geometry
-- [Beam intensity drop](../tomography/beam_intensity_drop.md) — I0 monitoring relevant to normalization
+- [산란 아티팩트](../medical_imaging/scatter_artifact.md) — CT 기하에서의 산란
+- [빔 강도 강하](../tomography/beam_intensity_drop.md) — 정규화에 관련된 I0 모니터링

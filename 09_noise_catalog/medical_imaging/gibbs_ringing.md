@@ -1,43 +1,43 @@
-# Gibbs Ringing (Truncation Ringing)
+# 깁스 링잉(Gibbs Ringing, 절단 링잉)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | Medical MRI / Synchrotron Coherent Imaging |
-| **Noise Type** | Computational |
-| **Severity** | Moderate |
-| **Frequency** | Common |
-| **Detection Difficulty** | Easy |
-| **Origin Domain** | Medical Imaging (MRI) |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | 의료 MRI / 방사광 코히어런트 영상 |
+| **노이즈 유형** | 계산적(Computational) |
+| **심각도** | 보통(Moderate) |
+| **빈도** | 흔함(Common) |
+| **탐지 난이도** | 쉬움(Easy) |
+| **기원 도메인** | 의료 영상(MRI) |
 
-## Visual Examples
+## 시각적 예시
 
-![Before and after — Gibbs ringing](../images/gibbs_ringing_before_after.png)
+![보정 전후 — 깁스 링잉](../images/gibbs_ringing_before_after.png)
 
-> **Image source:** Synthetic sharp-edge phantom with Fourier truncation. Left: oscillations at step boundaries from finite frequency sampling. Right: after Hamming apodization. MIT license.
+> **이미지 출처:** 푸리에 절단을 적용한 합성 날카로운 가장자리 팬텀. 왼쪽: 유한 주파수 샘플링으로 인한 계단 경계의 진동. 오른쪽: Hamming 어포다이제이션 후. MIT 라이선스.
 
-## Description
+## 설명
 
-Gibbs ringing (also called truncation ringing or spectral leakage) manifests as oscillating bright/dark bands parallel to sharp edges. It arises from the finite sampling of frequency space (k-space in MRI, reciprocal space in diffraction), which is equivalent to multiplying the ideal infinite spectrum by a rectangular window function. The resulting sinc-function convolution produces characteristic overshoots and ringing at discontinuities.
+깁스 링잉(절단 링잉 또는 스펙트럼 누출이라고도 함)은 날카로운 가장자리에 평행하게 진동하는 밝은/어두운 띠로 나타납니다. 이는 주파수 공간(MRI의 k-공간, 회절의 역격자 공간)의 유한 샘플링에서 비롯되며, 이는 이상적인 무한 스펙트럼에 직사각형 창 함수를 곱하는 것과 동등합니다. 결과로 생기는 sinc 함수 컨볼루션은 불연속점에서 특징적인 오버슈트(overshoot)와 링잉을 만듭니다.
 
-**Synchrotron relevance:** Directly applicable to coherent diffraction imaging (CDI), ptychography with finite detector extent, and any Fourier-based reconstruction with limited frequency sampling.
+**방사광 관련성:** 코히어런트 회절 영상(CDI), 유한한 검출기 범위를 갖는 프티코그래피(ptychography), 그리고 제한된 주파수 샘플링을 갖는 모든 푸리에 기반 재구성에 직접 적용됩니다.
 
-## Root Cause
+## 근본 원인
 
-- Finite sampling in frequency/reciprocal space → truncation of Fourier series
-- Sharp edges in real space require infinite frequency components to represent exactly
-- Truncating at finite frequency → convolution with sinc function → ringing oscillations
-- Worse with: low matrix size, sharp material boundaries, high-contrast interfaces
+- 주파수/역격자 공간의 유한 샘플링 → 푸리에 급수의 절단
+- 실공간의 날카로운 가장자리는 정확한 표현을 위해 무한 주파수 성분이 필요
+- 유한 주파수에서 절단 → sinc 함수와의 컨볼루션 → 링잉 진동
+- 다음의 경우 더 심함: 작은 행렬 크기, 날카로운 물질 경계, 고대비 인터페이스
 
-### Mathematical Origin
+### 수학적 기원
 
 ```
 f(x) = Σ_{n=-N}^{N} c_n · exp(2πinx)   (truncated at ±N)
      → Gibbs overshoot ≈ 9% of discontinuity height (regardless of N)
 ```
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -62,16 +62,16 @@ def detect_gibbs_ringing(line_profile):
     return False
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Alternating bright/dark bands parallel to sharp edges
-- Overshoot (bright line) immediately adjacent to high-contrast boundary
-- Ringing amplitude ~9% of edge contrast, decaying with distance
-- Most visible at high-contrast interfaces (bone/soft tissue, air/material)
+- 날카로운 가장자리에 평행하게 교차하는 밝은/어두운 띠
+- 고대비 경계에 바로 인접한 오버슈트(밝은 선)
+- 링잉 진폭이 가장자리 대비의 약 9%이며, 거리에 따라 감쇠
+- 고대비 인터페이스(뼈/연조직, 공기/물질)에서 가장 잘 보임
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -88,14 +88,14 @@ def gibbs_overshoot_measurement(line_profile, edge_idx, side='right'):
     return overshoot_pct  # Theoretical max ~8.95%
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Traditional Approaches
+### 전통적 접근법
 
-1. **Apodization / windowing:** Apply Hamming, Hanning, or Tukey window to k-space data before inverse FFT
-2. **Zero-filling interpolation:** Increase matrix size (cosmetic improvement, no new information)
-3. **Gegenbauer reconstruction:** Polynomial-based method that avoids Gibbs overshoot
-4. **Total variation filtering:** Post-reconstruction TV denoising to suppress oscillations
+1. **어포다이제이션(Apodization) / 윈도윙:** 역 FFT 전에 k-공간 데이터에 Hamming, Hanning, 또는 Tukey 창 적용
+2. **제로 패딩 보간:** 행렬 크기 증가 (외형적 개선만, 새로운 정보는 없음)
+3. **Gegenbauer 재구성:** 깁스 오버슈트를 회피하는 다항식 기반 방법
+4. **Total Variation 필터링:** 재구성 후 TV 디노이징을 통해 진동 억제
 
 ```python
 import numpy as np
@@ -109,30 +109,30 @@ def apply_hamming_apodization(kspace_data):
     return kspace_data * window
 ```
 
-### AI/ML Approaches
+### AI/ML 접근법
 
-- **HDNR (2018):** CNN-based Gibbs ringing removal for MRI (Muckley et al.)
-- **Subvoxel-accuracy networks:** Learning de-ringing as super-resolution task
+- **HDNR (2018):** MRI를 위한 CNN 기반 깁스 링잉 제거 (Muckley et al.)
+- **서브복셀 정확도 네트워크:** 디링잉을 초해상도(super-resolution) 과제로 학습
 
-## Key References
+## 주요 참고문헌
 
-- **Gibbs (1899)** — Original mathematical description of the phenomenon
-- **Archibald & Gelb (2002)** — "Reducing the Gibbs phenomenon" — comprehensive methods review
-- **Kellner et al. (2016)** — "Gibbs-ringing artifact removal based on local subvoxel-shifts" — widely used MRI method
-- **Block et al. (2008)** — Compressed sensing MRI (implicitly handles Gibbs via sparsity)
+- **Gibbs (1899)** — 현상에 대한 원조 수학적 기술
+- **Archibald & Gelb (2002)** — "Reducing the Gibbs phenomenon" — 종합적 방법 리뷰
+- **Kellner et al. (2016)** — "Gibbs-ringing artifact removal based on local subvoxel-shifts" — 널리 쓰이는 MRI 방법
+- **Block et al. (2008)** — 압축 센싱 MRI (희소성을 통해 깁스를 암묵적으로 처리)
 
-## Relevance to Synchrotron Data
+## 방사광 데이터와의 관련성
 
-| Scenario | Relevance |
-|----------|-----------|
-| Coherent diffraction imaging (CDI) | Finite detector → Fourier truncation → ringing |
-| Ptychography reconstruction | Limited reciprocal-space sampling at high q |
-| Phase retrieval (Paganin) | Sharp phase boundaries produce ringing in reconstruction |
-| EXAFS Fourier transform | Finite k-range causes ripples in R-space |
-| Crystallography (Fourier maps) | Series termination ripples around atoms |
+| 시나리오 | 관련성 |
+|----------|--------|
+| 코히어런트 회절 영상(CDI) | 유한 검출기 → 푸리에 절단 → 링잉 |
+| 프티코그래피 재구성 | 높은 q에서 제한된 역격자 공간 샘플링 |
+| 위상 복원(Paganin) | 날카로운 위상 경계가 재구성에서 링잉 생성 |
+| EXAFS 푸리에 변환 | 유한 k-범위가 R-공간에 잔물결 유발 |
+| 결정학(푸리에 맵) | 원자 주변의 급수 종결 잔물결 |
 
-## Related Resources
+## 관련 자료
 
-- [Partial coherence](../ptychography/partial_coherence.md) — Related Fourier-space limitation
-- [Sparse-angle artifact](../tomography/sparse_angle_artifact.md) — Incomplete sampling in angular domain
-- [Statistical noise (EXAFS)](../spectroscopy/statistical_noise_exafs.md) — k-space truncation in spectroscopy
+- [Partial coherence](../ptychography/partial_coherence.md) — 관련된 푸리에 공간 한계
+- [Sparse-angle artifact](../tomography/sparse_angle_artifact.md) — 각도 영역의 불완전 샘플링
+- [Statistical noise (EXAFS)](../spectroscopy/statistical_noise_exafs.md) — 분광학에서의 k-공간 절단

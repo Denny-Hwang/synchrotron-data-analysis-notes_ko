@@ -1,37 +1,37 @@
-# Shot Noise in Low-Dose Imaging
+# 저선량 이미징에서의 산탄 노이즈(Shot Noise in Low-Dose Imaging)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | SEM / TEM / Cryo-EM |
-| **Noise Type** | Statistical |
-| **Severity** | Critical |
-| **Frequency** | Always |
-| **Detection Difficulty** | Easy |
-| **Origin Domain** | Electron Microscopy |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | SEM / TEM / Cryo-EM |
+| **노이즈 유형** | 통계적(Statistical) |
+| **심각도** | 심각(Critical) |
+| **빈도** | 항상(Always) |
+| **탐지 난이도** | 쉬움(Easy) |
+| **기원 도메인** | 전자 현미경(Electron Microscopy) |
 
-## Visual Examples
+## 시각적 예시
 
-![Before and after — shot noise in low-dose imaging](../images/shot_noise_low_dose_before_after.png)
+![보정 전후 — 저선량 이미징의 산탄 노이즈](../images/shot_noise_low_dose_before_after.png)
 
-> **Image source:** Synthetic particle image with Poisson noise at ~5 e⁻/pixel. Left: single low-dose exposure (SNR < 0.1). Right: class average of 100 aligned particles. MIT license.
+> **이미지 출처:** ~5 e⁻/pixel 수준의 푸아송 노이즈를 가한 합성 입자 이미지. 왼쪽: 단일 저선량 노출(SNR < 0.1). 오른쪽: 정렬된 100개 입자의 클래스 평균. MIT 라이선스.
 
-## Description
+## 설명
 
-Shot noise (Poisson noise) is the fundamental statistical noise in electron microscopy arising from the discrete nature of electron detection. Each pixel's electron count follows a Poisson distribution, where the variance equals the mean count. In low-dose imaging — essential for radiation-sensitive biological samples in cryo-EM — SNR can be extremely low (SNR < 0.1 per particle image), making individual particles virtually invisible without averaging.
+산탄 노이즈(Shot noise, 푸아송 노이즈)는 전자 검출의 이산적 특성에서 비롯되는 전자 현미경의 근본적인 통계 노이즈입니다. 각 픽셀의 전자 수는 푸아송 분포를 따르며, 분산은 평균 카운트와 같습니다. 방사선에 민감한 cryo-EM 생체 시료에 필수적인 저선량 이미징에서는 SNR이 매우 낮아질 수 있어(입자 이미지당 SNR < 0.1), 평균화 없이는 개별 입자를 사실상 볼 수 없습니다.
 
-**Synchrotron relevance:** Directly analogous to photon counting noise in low-flux synchrotron measurements (XRF, low-dose CT). The Poisson noise model, SNR considerations, and averaging strategies are identical.
+**방사광 관련성:** 저플럭스 방사광 측정(XRF, 저선량 CT)에서의 광자 계수 노이즈와 직접적으로 유사합니다. 푸아송 노이즈 모델, SNR 고려사항, 평균화 전략은 동일합니다.
 
-## Root Cause
+## 근본 원인
 
-- Electron detection is a discrete counting process → Poisson statistics
-- Low-dose required for: biological cryo-EM, beam-sensitive materials, in-situ experiments
-- SNR = √N for N detected electrons per pixel
-- Typical cryo-EM: ~20-40 e⁻/Å² total dose → SNR per particle image < 0.1
-- Compounded by detector DQE (Detective Quantum Efficiency) < 1
+- 전자 검출은 이산적 카운팅 과정 → 푸아송 통계
+- 다음의 경우 저선량이 요구됨: 생물학적 cryo-EM, 빔 민감성 물질, in-situ 실험
+- 픽셀당 검출 전자 수가 N일 때 SNR = √N
+- 일반적인 cryo-EM: 총 선량 ~20-40 e⁻/Å² → 입자 이미지당 SNR < 0.1
+- 검출기 DQE(Detective Quantum Efficiency) < 1로 인해 더욱 악화
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -55,16 +55,16 @@ def assess_poisson_noise(image, gain=1.0):
     return slope
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Grainy, "speckled" appearance uniform across image
-- SNR degrades with lower dose — features barely distinguishable from noise
-- Individual particle images in cryo-EM appear as noisy blobs
-- Noise amplitude proportional to √(signal intensity)
+- 이미지 전체에 걸쳐 균일하게 나타나는 거칠고 "얼룩진(speckled)" 외관
+- 선량이 낮을수록 SNR이 저하 — 특징을 노이즈와 구분하기 어려움
+- cryo-EM에서 개별 입자 이미지가 노이즈 덩어리(blob)처럼 보임
+- 노이즈 진폭이 √(신호 강도)에 비례
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -87,14 +87,14 @@ def estimate_snr_per_particle(micrograph, particle_coords, box_size=256):
     return snrs
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Traditional Approaches
+### 전통적 접근
 
-1. **Class averaging:** Align and average thousands of similar particle images (cryo-EM gold standard)
-2. **Dose weighting:** Weight movie frames by radiation-damage-aware filter (higher dose = more damage = lower weight at high frequencies)
-3. **Wiener filtering:** Optimal linear filter given known CTF and noise model
-4. **Electron counting:** Direct detection with counting mode (DQE → 1)
+1. **클래스 평균화(Class averaging):** 수천 개의 유사 입자 이미지를 정렬하고 평균(cryo-EM의 표준 방법)
+2. **선량 가중치(Dose weighting):** 영화 프레임을 방사선 손상 인식 필터로 가중(높은 선량 = 더 큰 손상 = 고주파에서 낮은 가중치)
+3. **위너 필터링(Wiener filtering):** 알려진 CTF와 노이즈 모델이 주어졌을 때 최적의 선형 필터
+4. **전자 카운팅(Electron counting):** 카운팅 모드의 직접 검출(DQE → 1)
 
 ```python
 def dose_weighting(movie_frames, dose_per_frame, voltage=300):
@@ -115,14 +115,14 @@ def dose_weighting(movie_frames, dose_per_frame, voltage=300):
     return np.real(np.fft.ifft2(weighted_sum / (weight_sum + 1e-10)))
 ```
 
-### AI/ML Approaches
+### AI/ML 접근
 
-- **Topaz-Denoise:** Self-supervised denoising for cryo-EM (Bepler et al., 2020)
-- **CryoDRGN:** Deep generative model for heterogeneous reconstruction
-- **Noise2Noise / Noise2Void:** Self-supervised approaches applicable to EM data
-- **Warp:** Real-time processing with ML-based denoising
+- **Topaz-Denoise:** cryo-EM을 위한 자기지도 디노이징 (Bepler et al., 2020)
+- **CryoDRGN:** 이질적 재구성을 위한 심층 생성 모델
+- **Noise2Noise / Noise2Void:** EM 데이터에 적용 가능한 자기지도 접근법
+- **Warp:** ML 기반 디노이징을 활용한 실시간 처리
 
-## Key References
+## 주요 참고문헌
 
 - **Bepler et al. (2020)** — "Topaz-Denoise: general deep denoising models for cryoEM" — Nature Communications
 - **Grant & Grigorieff (2015)** — "Measuring the optimal exposure for single particle cryo-EM" — dose weighting
@@ -130,28 +130,28 @@ def dose_weighting(movie_frames, dose_per_frame, voltage=300):
 - **McMullan et al. (2014)** — "Detective quantum efficiency of electron area detectors" — DQE analysis
 - **EMPIAR** — Electron Microscopy Public Image Archive (benchmark datasets)
 
-## Key Datasets & Benchmarks
+## 주요 데이터셋 및 벤치마크
 
-| Dataset | Description |
-|---------|-------------|
-| EMPIAR-10025 | T20S proteasome — standard cryo-EM benchmark |
-| EMPIAR-10028 | β-galactosidase — high-resolution test case |
-| EMPIAR-10061 | TRPV1 channel — membrane protein benchmark |
-| Topaz-Denoise training set | Paired even/odd frame averages for self-supervised training |
+| 데이터셋 | 설명 |
+|---------|------|
+| EMPIAR-10025 | T20S proteasome — 표준 cryo-EM 벤치마크 |
+| EMPIAR-10028 | β-galactosidase — 고해상도 테스트 케이스 |
+| EMPIAR-10061 | TRPV1 channel — 막 단백질 벤치마크 |
+| Topaz-Denoise training set | 자기지도 학습을 위한 짝수/홀수 프레임 평균 페어 |
 
-## Real-World Before/After Examples
+## 실제 보정 전후 예시
 
-The following published sources provide real experimental before/after comparisons:
+다음 출판된 자료들은 실제 실험적 보정 전후 비교를 제공합니다:
 
-| Source | Type | Figure | Description | License |
-|--------|------|--------|-------------|---------|
-| [Bepler et al. 2020 — Topaz-Denoise](https://doi.org/10.1038/s41467-020-18952-1) | Paper | Fig 2 | General deep denoising models for cryo-EM — real micrograph before/after denoising | CC BY 4.0 |
-| [EMPIAR database](https://www.ebi.ac.uk/empiar/) | Data repository | Multiple datasets | Electron Microscopy Public Image Archive — real cryo-EM datasets for benchmarking | Open access |
+| 출처 | 유형 | 그림 | 설명 | 라이선스 |
+|------|------|------|------|---------|
+| [Bepler et al. 2020 — Topaz-Denoise](https://doi.org/10.1038/s41467-020-18952-1) | 논문 | Fig 2 | cryo-EM을 위한 일반 심층 디노이징 모델 — 실제 마이크로그래프의 디노이징 전후 비교 | CC BY 4.0 |
+| [EMPIAR database](https://www.ebi.ac.uk/empiar/) | 데이터 저장소 | 다수의 데이터셋 | Electron Microscopy Public Image Archive — 벤치마킹용 실제 cryo-EM 데이터셋 | Open access |
 
-> **Recommended reference**: [Bepler et al. 2020 — Topaz-Denoise (Nature Communications)](https://doi.org/10.1038/s41467-020-18952-1)
+> **권장 참고자료**: [Bepler et al. 2020 — Topaz-Denoise (Nature Communications)](https://doi.org/10.1038/s41467-020-18952-1)
 
-## Related Resources
+## 관련 자료
 
-- [Photon counting noise](../xrf_microscopy/photon_counting_noise.md) — Same Poisson statistics in X-ray detection
-- [Low-dose noise](../tomography/low_dose_noise.md) — Analogous problem in synchrotron tomography
-- [Radiation damage](../spectroscopy/radiation_damage.md) — Why low dose is necessary
+- [광자 계수 노이즈](../xrf_microscopy/photon_counting_noise.md) — X선 검출에서의 동일한 푸아송 통계
+- [저선량 노이즈](../tomography/low_dose_noise.md) — 방사광 토모그래피에서의 유사 문제
+- [방사선 손상](../spectroscopy/radiation_damage.md) — 저선량이 필요한 이유

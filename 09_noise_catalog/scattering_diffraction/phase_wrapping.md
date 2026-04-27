@@ -1,44 +1,44 @@
-# Phase Wrapping Artifact
+# 위상 래핑 아티팩트(Phase Wrapping Artifact)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | Phase-Contrast Imaging / CDI / Interferometry |
-| **Noise Type** | Computational |
-| **Severity** | Critical |
-| **Frequency** | Common |
-| **Detection Difficulty** | Moderate |
-| **Origin Domain** | Synchrotron Phase-Contrast Imaging (ESRF, Diamond, SLS) |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | 위상 대비 이미징 / CDI / 간섭계 |
+| **노이즈 유형** | 계산적(Computational) |
+| **심각도** | 심각(Critical) |
+| **빈도** | 흔함(Common) |
+| **탐지 난이도** | 보통(Moderate) |
+| **기원 도메인** | 방사광 위상 대비 이미징(ESRF, Diamond, SLS) |
 
-## Visual Examples
+## 시각적 예시
 
-![Before and after — phase wrapping](../images/phase_wrapping_before_after.png)
+![보정 전후 — 위상 래핑](../images/phase_wrapping_before_after.png)
 
-> **Image source:** Synthetic phase map with range exceeding [-π, π]. Left: wrapped phase with 2π discontinuities. Right: after quality-guided phase unwrapping recovering true continuous phase. MIT license.
+> **이미지 출처:** 범위가 [-π, π]를 초과하는 합성 위상 맵. 왼쪽: 2π 불연속을 포함한 래핑된 위상. 오른쪽: 품질 기반 위상 언래핑 후 진정한 연속 위상이 복원됨. MIT 라이선스.
 
-## Description
+## 설명
 
-Phase wrapping occurs when the retrieved phase exceeds the principal value range [-π, π], causing abrupt 2π discontinuities in the phase map. These artificial "jumps" create false boundaries, corrupt quantitative phase measurements, and mislead segmentation algorithms. It is a fundamental ambiguity in any phase retrieval method, analogous to the aliasing problem in signal processing.
+위상 래핑(Phase wrapping)은 복원된 위상이 주값 범위 [-π, π]를 초과할 때 발생하며, 위상 맵에서 갑작스러운 2π 불연속을 야기합니다. 이러한 인위적인 "점프"는 거짓 경계를 만들고, 정량적 위상 측정을 손상시키며, 분할(segmentation) 알고리즘을 오도할 수 있습니다. 이는 신호 처리에서의 에일리어싱 문제와 유사하게, 모든 위상 복원 방법에 내재된 근본적 모호성입니다.
 
-**Multi-facility relevance:** Encountered at all synchrotron facilities doing phase-contrast imaging (ESRF ID19, Diamond I13, SLS TOMCAT), grating interferometry, ptychography, and holographic methods.
+**다중 시설 관련성:** 위상 대비 이미징(ESRF ID19, Diamond I13, SLS TOMCAT), 격자 간섭계, ptychography, 홀로그래픽 방법을 수행하는 모든 방사광 시설에서 발생합니다.
 
-## Root Cause
+## 근본 원인
 
-- Phase is inherently cyclic: φ and φ + 2πn produce identical measurements
-- Phase retrieval algorithms return wrapped phase in [-π, π]
-- True phase of thick or dense samples can exceed π → wrapping occurs
-- Large phase gradients (sharp density interfaces) → undersampled phase → wrapping
-- In interferometry: fringe analysis inherently yields wrapped phase
+- 위상은 본질적으로 주기적: φ와 φ + 2πn은 동일한 측정값을 산출
+- 위상 복원 알고리즘은 [-π, π] 범위로 래핑된 위상을 반환
+- 두꺼운 또는 밀도가 높은 시료의 진정한 위상은 π를 초과 가능 → 래핑 발생
+- 큰 위상 기울기(날카로운 밀도 경계) → 위상 언더샘플링 → 래핑
+- 간섭계: 프린지 분석은 본질적으로 래핑된 위상 산출
 
-### Mathematical Description
+### 수학적 기술
 
 ```
 φ_wrapped(x) = φ_true(x) mod 2π - π
 When φ_true > π: discontinuous jump of -2π appears
 ```
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -60,16 +60,16 @@ def detect_phase_wraps(phase_map, threshold=5.0):
     return wrap_map
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Sharp, discontinuous "cliff" lines in otherwise smooth phase maps
-- Phase values abruptly jump from +π to -π (or vice versa)
-- "Streaks" of anomalous phase at dense/thick interfaces
-- Histogram of phase values shows pile-up at ±π boundaries
+- 부드러운 위상 맵 내 날카롭고 불연속적인 "절벽(cliff)" 라인
+- 위상 값이 +π에서 -π(또는 그 반대)로 갑자기 점프
+- 밀도가 높거나 두꺼운 경계에서의 비정상 위상의 "줄무늬"
+- 위상 값 히스토그램이 ±π 경계에 쌓임
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -89,15 +89,15 @@ def phase_gradient_reliability(phase_map):
     return reliability
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Traditional Approaches
+### 전통적 접근
 
-1. **Path-following unwrapping:** Goldstein (branch-cut), Flynn (minimum discontinuity)
-2. **Quality-guided unwrapping:** Unwrap from most reliable pixels first (Herráez et al., 2002)
-3. **Least-squares unwrapping:** Minimize ∇²(φ_unwrapped - φ_wrapped) — global method
-4. **Multi-distance phase retrieval:** Multiple sample-detector distances reduce ambiguity
-5. **Dual-energy phase retrieval:** Two energies to resolve wrapping
+1. **경로 추종 언래핑:** Goldstein(branch-cut), Flynn(minimum discontinuity)
+2. **품질 기반 언래핑:** 가장 신뢰할 수 있는 픽셀부터 언래핑(Herráez et al., 2002)
+3. **최소 자승 언래핑:** ∇²(φ_unwrapped - φ_wrapped)를 최소화 — 전역 방법
+4. **다중 거리 위상 복원:** 여러 시료-검출기 거리로 모호성 감소
+5. **이중 에너지 위상 복원:** 두 에너지를 사용하여 래핑 해결
 
 ```python
 def quality_guided_unwrap_2d(wrapped_phase):
@@ -108,47 +108,47 @@ def quality_guided_unwrap_2d(wrapped_phase):
     return unwrapped
 ```
 
-### AI/ML Approaches
+### AI/ML 접근
 
-- **PhaseNet (2019):** Deep learning phase unwrapping (Wang et al.)
-- **DeepPhaseUnwrap:** U-Net predicting unwrapped phase from wrapped input
-- **Physics-informed unwrapping:** Neural network with phase-consistency loss
+- **PhaseNet (2019):** 딥러닝 위상 언래핑 (Wang et al.)
+- **DeepPhaseUnwrap:** 래핑된 입력으로부터 언래핑된 위상을 예측하는 U-Net
+- **물리 기반 언래핑:** 위상 일관성 손실을 사용하는 신경망
 
-### Software Tools
+### 소프트웨어 도구
 
-- **scikit-image** — `skimage.restoration.unwrap_phase` (quality-guided)
-- **SNAPHU** — Statistical-cost phase unwrapping (originally for InSAR)
-- **PyPhase** — Phase retrieval and unwrapping for X-ray imaging
+- **scikit-image** — `skimage.restoration.unwrap_phase` (품질 기반)
+- **SNAPHU** — 통계 비용 기반 위상 언래핑(원래 InSAR용)
+- **PyPhase** — X선 이미징용 위상 복원 및 언래핑
 
-## Key References
+## 주요 참고문헌
 
 - **Goldstein et al. (1988)** — "Satellite radar interferometry: two-dimensional phase unwrapping"
 - **Herráez et al. (2002)** — "Fast two-dimensional phase-unwrapping algorithm based on sorting by reliability"
-- **Ghiglia & Pritt (1998)** — "Two-Dimensional Phase Unwrapping: Theory, Algorithms, and Software" — definitive textbook
+- **Ghiglia & Pritt (1998)** — "Two-Dimensional Phase Unwrapping: Theory, Algorithms, and Software" — 정통 교과서
 - **Paganin et al. (2002)** — "Simultaneous phase and amplitude extraction from a single defocused image"
 
-## Facility Benchmarks
+## 시설별 벤치마크
 
-| Facility | Beamline | Phase Method |
-|----------|----------|--------------|
-| ESRF | ID19 | Propagation-based phase contrast + Paganin retrieval |
-| Diamond | I13 | Inline phase contrast + multi-distance retrieval |
-| SLS TOMCAT | X02DA | Single-distance Paganin + grating interferometry |
-| SPring-8 | BL20B2 | Talbot-Lau grating interferometry |
-| APS | 32-ID | Propagation phase contrast, Zernike phase contrast |
+| 시설 | 빔라인 | 위상 방법 |
+|------|--------|----------|
+| ESRF | ID19 | 전파 기반 위상 대비 + Paganin 복원 |
+| Diamond | I13 | 인라인 위상 대비 + 다중 거리 복원 |
+| SLS TOMCAT | X02DA | 단일 거리 Paganin + 격자 간섭계 |
+| SPring-8 | BL20B2 | Talbot-Lau 격자 간섭계 |
+| APS | 32-ID | 전파 위상 대비, Zernike 위상 대비 |
 
-## Real-World Before/After Examples
+## 실제 보정 전후 예시
 
-The following published sources provide real experimental before/after comparisons:
+다음 출판된 자료들은 실제 실험적 보정 전후 비교를 제공합니다:
 
-| Source | Type | Figure | Description | License |
-|--------|------|--------|-------------|---------|
-| [scikit-image unwrap_phase](https://scikit-image.org/docs/stable/api/skimage.restoration.html) | Software docs | API examples | Phase unwrapping function with examples showing wrapped vs unwrapped phase maps | BSD-3 |
+| 출처 | 유형 | 그림 | 설명 | 라이선스 |
+|------|------|------|------|---------|
+| [scikit-image unwrap_phase](https://scikit-image.org/docs/stable/api/skimage.restoration.html) | 소프트웨어 문서 | API 예제 | 래핑된 위상 맵 vs 언래핑된 위상 맵의 예시를 보여주는 위상 언래핑 함수 | BSD-3 |
 
-> **Recommended reference**: [scikit-image — unwrap_phase (skimage.restoration)](https://scikit-image.org/docs/stable/api/skimage.restoration.html)
+> **권장 참고자료**: [scikit-image — unwrap_phase (skimage.restoration)](https://scikit-image.org/docs/stable/api/skimage.restoration.html)
 
-## Related Resources
+## 관련 자료
 
-- [Position error](../ptychography/position_error.md) — Phase errors in ptychographic reconstruction
-- [Gibbs ringing](../medical_imaging/gibbs_ringing.md) — Fourier-related reconstruction artifacts
-- [Partial coherence](../ptychography/partial_coherence.md) — Coherence affects phase retrieval quality
+- [위치 오류](../ptychography/position_error.md) — Ptychography 재구성에서의 위상 오류
+- [Gibbs ringing](../medical_imaging/gibbs_ringing.md) — Fourier 관련 재구성 아티팩트
+- [부분 결맞음](../ptychography/partial_coherence.md) — 결맞음이 위상 복원 품질에 영향

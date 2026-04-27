@@ -1,30 +1,30 @@
-# Radiation Damage in Crystallography
+# 결정학에서의 방사선 손상(Radiation Damage in Crystallography)
 
-## Classification
+## 분류
 
-| Attribute | Value |
-|-----------|-------|
-| **Modality** | Macromolecular Crystallography (MX) / Powder Diffraction |
-| **Noise Type** | Systematic |
-| **Severity** | Critical |
-| **Frequency** | Common |
-| **Detection Difficulty** | Moderate |
-| **Origin Domain** | Synchrotron Crystallography (All MX beamlines) |
+| 속성 | 값 |
+|------|-----|
+| **모달리티** | 거대분자 결정학(MX) / 분말 회절 |
+| **노이즈 유형** | 체계적(Systematic) |
+| **심각도** | 심각(Critical) |
+| **빈도** | 흔함(Common) |
+| **탐지 난이도** | 보통(Moderate) |
+| **기원 도메인** | 방사광 결정학(모든 MX 빔라인) |
 
-## Description
+## 설명
 
-Radiation damage in crystallography is the progressive deterioration of diffraction data quality due to X-ray-induced structural changes in the crystal. Primary damage (photoelectric absorption) creates free radicals that cause secondary chemical damage — disulfide bond breakage, decarboxylation of acidic residues, and eventual loss of crystalline order. This is distinct from the spectroscopic radiation damage already cataloged; here the focus is on crystallographic signatures and their impact on structure determination.
+결정학에서의 방사선 손상은 X선 유도 구조 변화로 인한 회절 데이터 품질의 점진적 저하입니다. 1차 손상(광전자 흡수)은 자유 라디칼을 생성하여 2차 화학적 손상을 유발합니다 — 이황화 결합 절단, 산성 잔기의 탈탄산화, 그리고 결국 결정 질서의 손실. 이는 이미 카탈로그된 분광학적 방사선 손상과 구별되며, 여기서는 결정학적 특징과 구조 결정에 미치는 영향에 초점을 맞춥니다.
 
-## Root Cause
+## 근본 원인
 
-- **Primary damage:** Photoelectric absorption creates fast electrons → ionization cascade
-- **Secondary damage:** Free radicals (OH·, e⁻_aq) diffuse and attack specific chemical groups
-- **Global damage:** Increasing B-factors, loss of high-resolution diffraction, unit cell expansion
-- **Specific damage:** Preferential destruction at disulfide bonds, carboxylates, methionines
-- Henderson limit: ~2×10⁷ Gy (20 MGy) for cryo-cooled protein crystals at 100K
-- Rate depends on: dose rate, temperature, sample composition, solvent content
+- **1차 손상:** 광전자 흡수가 빠른 전자를 생성 → 이온화 캐스케이드
+- **2차 손상:** 자유 라디칼(OH·, e⁻_aq)이 확산하여 특정 화학 그룹을 공격
+- **전역 손상:** B-factor 증가, 고해상도 회절 손실, 단위 셀 확장
+- **특이적 손상:** 이황화 결합, 카르복실산염, 메티오닌에서의 우선적 파괴
+- Henderson 한계: 100K cryo 냉각 단백질 결정의 경우 ~2×10⁷ Gy (20 MGy)
+- 비율은 다음에 의존: 선량률, 온도, 시료 조성, 용매 함량
 
-## Quick Diagnosis
+## 빠른 진단
 
 ```python
 import numpy as np
@@ -43,17 +43,17 @@ def track_radiation_damage(frame_intensities, resolution_shells):
     # expansion = (unit_cells[-1] - unit_cells[0]) / unit_cells[0]
 ```
 
-## Detection Methods
+## 탐지 방법
 
-### Visual Indicators
+### 시각적 지표
 
-- Diffraction spots fade progressively during data collection (especially high-resolution)
-- Wilson plot shows increasing B-factor with accumulated dose
-- Unit cell dimensions increase (0.1-1% over full dataset)
-- R_merge increases for later frames
-- Difference Fourier maps show negative density at disulfides, positive at carboxylates
+- 데이터 수집 중 회절 점이 점진적으로 희미해짐(특히 고해상도)
+- Wilson plot에서 누적 선량에 따라 B-factor 증가
+- 단위 셀 차원 증가(전체 데이터셋에서 0.1-1%)
+- 후반 프레임의 R_merge 증가
+- 차이 Fourier 맵이 이황화 결합에서 음의 밀도, 카르복실산염에서 양의 밀도를 표시
 
-### Automated Detection
+### 자동 탐지
 
 ```python
 import numpy as np
@@ -66,22 +66,22 @@ def dose_dependent_bfactor(frame_number, mean_b_per_frame):
     return slope
 ```
 
-## Correction Methods
+## 보정 방법
 
-### Prevention
+### 예방
 
-1. **Cryo-cooling (100K):** Slows radical diffusion ~100× vs room temperature
-2. **Helical data collection:** Translate crystal during rotation to spread dose
-3. **Multi-crystal strategy:** Merge partial datasets from multiple crystals
-4. **Beam attenuation:** Reduce flux density (trade-off with exposure time)
-5. **Radical scavengers:** Ascorbate, sodium nitrate in cryoprotectant
+1. **Cryo 냉각 (100K):** 라디칼 확산을 상온 대비 ~100배 늦춤
+2. **Helical 데이터 수집:** 회전 중 결정을 이동시켜 선량을 분산
+3. **다중 결정 전략:** 여러 결정의 부분 데이터셋을 병합
+4. **빔 감쇠:** 플럭스 밀도 감소(노출 시간과의 트레이드오프)
+5. **라디칼 제거제:** Cryoprotectant 내 ascorbate, sodium nitrate
 
-### Data Processing Corrections
+### 데이터 처리 보정
 
-1. **Zero-dose extrapolation:** Extrapolate intensities to zero dose using decay curves
-2. **Frame rejection:** Discard frames beyond Henderson dose limit
-3. **Dose-weighted scaling:** Weight frames inversely by accumulated dose
-4. **RIDL (Radiation-Induced Density Loss):** Per-atom damage metric analysis
+1. **제로 선량 외삽:** 감쇠 곡선을 사용하여 강도를 제로 선량으로 외삽
+2. **프레임 거부:** Henderson 선량 한계를 넘는 프레임 폐기
+3. **선량 가중 스케일링:** 누적 선량의 역수로 프레임 가중
+4. **RIDL (Radiation-Induced Density Loss):** 원자별 손상 측정 분석
 
 ```python
 def zero_dose_extrapolation(intensities_per_frame, doses):
@@ -99,33 +99,33 @@ def zero_dose_extrapolation(intensities_per_frame, doses):
     return corrected
 ```
 
-### Software Tools
+### 소프트웨어 도구
 
-- **RADDOSE-3D** — Dose estimation for MX experiments
-- **BEST** — Optimal data collection strategy considering dose
-- **RIDL** — Radiation-Induced Density Loss analysis
-- **AIMLESS / XSCALE** — Dose-dependent scaling
+- **RADDOSE-3D** — MX 실험을 위한 선량 추정
+- **BEST** — 선량을 고려한 최적 데이터 수집 전략
+- **RIDL** — Radiation-Induced Density Loss 분석
+- **AIMLESS / XSCALE** — 선량 의존적 스케일링
 
-## Key References
+## 주요 참고문헌
 
-- **Garman & Weik (2023)** — "Radiation damage in macromolecular crystallography" — comprehensive review
+- **Garman & Weik (2023)** — "Radiation damage in macromolecular crystallography" — 종합 리뷰
 - **Henderson (1990)** — "Cryo-protection of protein crystals against radiation damage"
 - **Zeldin et al. (2013)** — "RADDOSE-3D: time- and space-resolved modelling of dose in MX"
 - **Bury et al. (2018)** — "RIDL: radiation-induced density loss analysis"
 - **de la Mora et al. (2020)** — "Radiation damage and dose limits in serial synchrotron crystallography"
 
-## Facility Benchmarks
+## 시설별 벤치마크
 
-| Facility | Approach |
-|----------|----------|
-| ESRF (MASSIF) | Fully automated damage-aware data collection |
-| Diamond I04 | ISPyB dose tracking + BEST strategy |
-| SPring-8 ZOO | Multi-crystal serial approach |
-| APS GM/CA | Rastered/vector data collection |
-| SLS PXI/PXII | Dose-stratified processing in adp |
-| NSLS-II FMX | Eiger detector — fast readout minimizes per-frame dose |
+| 시설 | 접근법 |
+|------|--------|
+| ESRF (MASSIF) | 완전 자동화된 손상 인식 데이터 수집 |
+| Diamond I04 | ISPyB 선량 추적 + BEST 전략 |
+| SPring-8 ZOO | 다중 결정 직렬 접근법 |
+| APS GM/CA | 래스터/벡터 데이터 수집 |
+| SLS PXI/PXII | adp에서의 선량 계층화 처리 |
+| NSLS-II FMX | Eiger 검출기 — 빠른 읽기로 프레임당 선량 최소화 |
 
-## Related Resources
+## 관련 자료
 
-- [Radiation damage (spectroscopy)](../spectroscopy/radiation_damage.md) — Spectroscopic radiation damage (XANES/EXAFS)
-- [Beam intensity drop](../tomography/beam_intensity_drop.md) — Related time-dependent signal change
+- [방사선 손상 (분광학)](../spectroscopy/radiation_damage.md) — 분광학적 방사선 손상(XANES/EXAFS)
+- [빔 강도 강하](../tomography/beam_intensity_drop.md) — 관련된 시간 의존적 신호 변화
