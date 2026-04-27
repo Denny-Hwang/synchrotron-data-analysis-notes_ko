@@ -1,0 +1,7 @@
+# Dependencies for scripts/build_static_site.py (GitHub Pages build).
+# Keep in sync with explorer/requirements.txt for the shared libraries
+# (python-markdown, pygments, pyyaml) so local Streamlit and CI produce
+# the same HTML.
+markdown>=3.5
+pygments>=2.17
+pyyaml>=6.0

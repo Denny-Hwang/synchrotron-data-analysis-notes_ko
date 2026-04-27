@@ -9,17 +9,53 @@
 DOE BER(생물·환경 연구) 프로그램 통합 X선 역량을 문서화합니다. 다음 내용을 다룹니다:
 
 - **6가지 X선 모달리티** — 토모그래피, XRF 현미경, 타이코그래피, 분광학, 결정학, 산란
-- **14가지 AI/ML 방법** — 5개 카테고리(분할, 노이즈 제거, 재구성, 자율 실험, 다중모달 통합)로 구성
-- **14편의 논문 리뷰** — 싱크로트론 AI/ML 분야 주요 출판물의 상세 분석
-- **7개 오픈소스 도구** — ROI-Finder, TomocuPy, TomoPy, MAPS, MLExchange, Bluesky/EPICS의 리버스 엔지니어링된 아키텍처
+- **18가지 AI/ML 방법** — 5개 카테고리(분할, 노이즈 제거, 재구성, 자율 실험, 다중모달 통합)
+- **19편의 논문 리뷰** — 싱크로트론 AI/ML 분야 주요 출판물의 상세 분석
+- **10개 오픈소스 도구** — ROI-Finder, TomocuPy, TomoPy, MAPS, MLExchange, Bluesky/EPICS, HTTomo, PyXRF, Tike의 리버스 엔지니어링된 아키텍처
 - **HDF5 데이터 스키마** — EDA 노트북 및 샘플 데이터 링크 포함
 - **엔드투엔드 데이터 파이프라인** — 수집부터 저장까지 아키텍처 다이어그램 포함
-- **29종 노이즈/아티팩트 유형** — 탐지 코드, 보정 전후 예시, 증상 기반 트러블슈터와 함께 카탈로그화
+- **47종 노이즈/아티팩트 유형** — 5개 도메인(토모그래피, XRF, 분광학, 타이코그래피/산란/회절, 의료영상, 전자현미경, 교차 분야)에 걸쳐 탐지 코드 및 보정 전후 예시 포함
 
-## eBERlight Explorer (인터랙티브 웹 앱)
+## 문서
 
-이 저장소에는 모든 콘텐츠를 시각적으로 탐색할 수 있는 인터랙티브 Streamlit 웹 애플리케이션
-**eBERlight Research Explorer**가 포함되어 있습니다.
+![notes-v0.1.0](https://img.shields.io/badge/notes-v0.1.0-blue)
+![explorer-v0.3.0](https://img.shields.io/badge/explorer-v0.3.0-green)
+
+전체 프로젝트 문서는 [`docs/README.md`](docs/README.md)에서 확인할 수 있으며 다음을 포함합니다:
+
+- **제품 레이어**: Vision, 페르소나, 로드맵, PRD, 사용자 스토리, 비기능 요구사항
+- **디자인 레이어**: 정보 아키텍처, 디자인 시스템, 와이어프레임
+- **아키텍처 결정**: 프레임워크, IA, 스키마, 토큰, 버저닝을 다루는 7개 ADR
+- **구현**: 셋업 가이드, 코딩 표준, 데이터 계약(data contracts)
+- **테스트**: 테스트 계획, 접근성 감사 체크리스트
+
+### 정적 사이트 (GitHub Pages)
+
+GitHub Pages에서 Streamlit Explorer의 읽기 전용 **정적 미러**가 호스팅됩니다.
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml)이 `main` 브랜치 푸시마다
+[`scripts/build_static_site.py`](scripts/build_static_site.py)를 실행해 자동 재생성합니다.
+미러는 `explorer/lib/ia.py`, `explorer/lib/notes.py`, `explorer/assets/styles.css`를 그대로
+재사용해 두 표면(surface)이 어긋나지 않도록 합니다. 동기화 계약은
+[`docs/03_implementation/github_pages_sync.md`](docs/03_implementation/github_pages_sync.md),
+근거(rationale)는 [ADR-007](docs/02_design/decisions/ADR-007.md)을 참조하세요.
+
+게시되는 사이트 구성:
+- 3개 클러스터 카드를 가진 랜딩 페이지 (`explorer/app.py` 미러링)
+- Discover / Explore / Build 클러스터 페이지 (`explorer/pages/` 미러링)
+- 노트별 상세 페이지(176개 노트), 마크다운/코드 하이라이트/메타데이터 패널 포함
+- `/wireframes/`에 디자인 와이어프레임 (이전 Pages 설정에서 보존)
+
+### 와이어프레임 미리보기
+
+미러 사이트의 `/wireframes/`에도 게시되는 정적 HTML 와이어프레임:
+- [랜딩 페이지](docs/02_design/wireframes/html/landing_v0.1.html)
+- [섹션 페이지](docs/02_design/wireframes/html/section_v0.1.html)
+- [도구 상세 페이지](docs/02_design/wireframes/html/tool_v0.1.html)
+
+## Explorer (재설계됨)
+
+`explorer/` 디렉토리의 **eBERlight Explorer**는 ANL 디자인 시스템에 정렬된 3-클러스터
+정보 아키텍처와 런타임 노트 렌더링을 제공하는 재설계된 Streamlit 포털입니다.
 
 ### Explorer 실행 방법
 
@@ -29,34 +65,32 @@ git clone https://github.com/Denny-Hwang/synchrotron-data-analysis-notes_ko.git
 cd synchrotron-data-analysis-notes_ko
 
 # 2. 의존성 설치
-pip install -r eberlight-explorer/requirements.txt
+pip install -r explorer/requirements.txt
 
 # 3. 앱 실행
-streamlit run eberlight-explorer/app.py
+streamlit run explorer/app.py
 ```
 
-앱이 브라우저에서 `http://localhost:8501`로 열립니다.
+브라우저에서 `http://localhost:8501`로 열립니다.
 
-### Explorer 페이지
+### 클러스터 구조 (3-클러스터 IA)
 
-| 페이지 | 설명 |
-|--------|------|
-| **홈** | 통계 및 빠른 탐색 가이드가 포함된 개요 대시보드 |
-| **지식 그래프** | 모달리티, 방법, 도구, 논문 간 관계의 인터랙티브 네트워크 시각화 |
-| **모달리티** | 사양, 빔라인, 관련 AI 방법을 포함한 6가지 X선 기법 탐색 |
-| **AI/ML 방법** | 카테고리별로 정리된 14가지 방법의 상세 문서 탐색 |
-| **출판물** | TL;DR 요약 및 워크플로우 다이어그램이 포함된 14편의 논문 리뷰 아카이브 |
-| **도구** | 아키텍처 분석 및 장단점이 포함된 7개 오픈소스 도구 카탈로그 |
-| **파이프라인** | 엔드투엔드 데이터 파이프라인(수집 → 저장) 시각적 안내 |
-| **데이터 구조** | HDF5 스키마, EDA 가이드, APS-U 전후 데이터 규모 분석 |
+새 Explorer는 9개 노트 폴더를 3개의 사용자 의도 기반 클러스터로 매핑합니다(ADR-004):
 
-### 난이도 레벨
+| 클러스터 | 포함 폴더 | 목적 |
+|----------|-----------|------|
+| **Discover** | `01_program_overview/`, `02_xray_modalities/` | BER 프로그램·시설·X선 기법 학습 |
+| **Explore** | `03_ai_ml_methods/`, `04_publications/`, `09_noise_catalog/` | AI/ML 방법, 논문 리뷰, 노이즈 카탈로그 탐색 |
+| **Build** | `05_tools_and_code/`, `06_data_structures/`, `07_data_pipeline/`, `08_references/` | 도구·HDF5 스키마·파이프라인·참고자료 활용 |
 
-Explorer는 각 페이지에서 세 단계의 상세도를 제공합니다:
+### 레거시 Explorer
 
-- **L0 (개요)** — 빠른 파악을 위한 상위 수준 요약
-- **L1 (중급)** — 테이블 및 비교가 포함된 상세 콘텐츠
-- **L2 (심층 분석)** — 전체 기술 세부사항, 코드 예제, 아키텍처 다이어그램
+기존 다중 페이지 Streamlit 앱은 [`eberlight-explorer/`](eberlight-explorer/)에 그대로 보존되어
+지식 그래프, 모달리티/방법/논문/도구별 상세 뷰, 데이터 파이프라인 시각화를 제공합니다.
+
+```bash
+streamlit run eberlight-explorer/app.py
+```
 
 ## 저장소 구조
 
@@ -64,14 +98,19 @@ Explorer는 각 페이지에서 세 단계의 상세도를 제공합니다:
 synchrotron-data-analysis-notes_ko/
 ├── 01_program_overview/     # BER 프로그램 미션, APS 시설, 15개 빔라인, 파트너 기관
 ├── 02_xray_modalities/      # 6가지 X선 기법: 원리, 데이터 형식, AI/ML 응용
-├── 03_ai_ml_methods/        # AI/ML 분류체계: 분할, 노이즈 제거, 재구성, 자율 실험
-├── 04_publications/         # 14편 논문 리뷰: 상세 분석 및 주요 발견
-├── 05_tools_and_code/       # 도구 분석: ROI-Finder, TomocuPy, TomoPy, Bluesky 등
+├── 03_ai_ml_methods/        # AI/ML 분류체계: 분할, 노이즈 제거, 재구성, 자율 실험, PINN, 확산 모델
+├── 04_publications/         # 19편 논문 리뷰: 상세 분석 및 주요 발견
+├── 05_tools_and_code/       # 도구 분석: ROI-Finder, TomocuPy, TomoPy, Bluesky, HTTomo, PyXRF, Tike 등
 ├── 06_data_structures/      # HDF5 스키마, EDA 노트북, 샘플 데이터 링크
 ├── 07_data_pipeline/        # 엔드투엔드 파이프라인: 수집 → 스트리밍 → 처리 → 저장
 ├── 08_references/           # 참고문헌(BibTeX), 용어집(A-Z), 유용한 링크
-├── 09_noise_catalog/        # 노이즈/아티팩트 카탈로그: 탐지, 예시, 트러블슈터
-└── eberlight-explorer/      # Streamlit 기반 인터랙티브 탐색 웹 앱
+├── 09_noise_catalog/        # 47종 노이즈/아티팩트 카탈로그(7개 도메인): 탐지·예시·트러블슈터
+├── docs/                    # 제품·디자인·구현·테스트·릴리스 문서 + 7개 ADR
+├── explorer/                # 재설계된 3-클러스터 Streamlit Explorer
+├── eberlight-explorer/      # 레거시 다중 페이지 Streamlit Explorer
+├── scripts/                 # 정적 사이트 생성기(build_static_site.py)
+├── .github/workflows/       # GitHub Pages 자동 배포 워크플로우
+└── CLAUDE.md                # Claude Code 협업 규약 및 불변조건
 ```
 
 ## 빠른 시작
@@ -98,11 +137,11 @@ synchrotron-data-analysis-notes_ko/
 
 1. **모달리티를 알고 있다면?** [`09_noise_catalog/`](09_noise_catalog/)에서 기법별 탐색
 2. **뭔가 이상한데 원인을 모르겠다면?** [증상 기반 트러블슈터](09_noise_catalog/troubleshooter.md) 사용
-3. **빠른 참조**: [요약 표](09_noise_catalog/summary_table.md)에서 29종 유형 한눈에 보기
+3. **빠른 참조**: [요약 표](09_noise_catalog/summary_table.md)에서 47종 유형 한눈에 보기
 
 ### 그냥 둘러보고 싶으신가요?
 
-시각적이고 인터랙티브한 경험을 위해 [eBERlight Explorer](#eberlight-explorer-인터랙티브-웹-앱)를 실행하세요.
+시각적이고 인터랙티브한 경험을 위해 [eBERlight Explorer](#explorer-재설계됨)를 실행하세요.
 
 ## 주요 자료
 
@@ -116,6 +155,9 @@ synchrotron-data-analysis-notes_ko/
 | TomocuPy | [github.com/nikitinvv/tomocupy](https://github.com/nikitinvv/tomocupy) |
 | Bluesky 프로젝트 | [blueskyproject.io](https://blueskyproject.io) |
 | MLExchange | [mlexchange.als.lbl.gov](https://mlexchange.als.lbl.gov) |
+| HTTomo | [diamondlightsource.github.io/httomo](https://diamondlightsource.github.io/httomo/) |
+| PyXRF | [github.com/NSLS-II/PyXRF](https://github.com/NSLS-II/PyXRF) |
+| Tike | [github.com/AdvancedPhotonSource/tike](https://github.com/AdvancedPhotonSource/tike) |
 
 ## 라이선스
 

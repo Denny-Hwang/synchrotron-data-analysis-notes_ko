@@ -31,7 +31,10 @@ categories:
       - id: noise2noise
         name: "Noise2Noise"
         file: "03_ai_ml_methods/denoising/noise2noise.md"
-    modalities: [tomography, xrf_microscopy]
+      - id: noise2void
+        name: "Noise2Void"
+        file: "03_ai_ml_methods/denoising/noise2void.md"
+    modalities: [tomography, xrf_microscopy, ptychography]
 
   - id: reconstruction
     name: "재구성"
@@ -48,6 +51,12 @@ categories:
       - id: inr_dynamic
         name: "INR Dynamic"
         file: "03_ai_ml_methods/reconstruction/inr_dynamic.md"
+      - id: diffusion_ct
+        name: "CT용 확산 모델"
+        file: "03_ai_ml_methods/reconstruction/diffusion_ct.md"
+      - id: pinns_xray
+        name: "X선용 PINN"
+        file: "03_ai_ml_methods/reconstruction/pinns_xray.md"
     modalities: [ptychography, tomography]
 
   - id: autonomous_experiment
@@ -68,7 +77,10 @@ categories:
       - id: ki_bo_xanes
         name: "XANES용 지식 주입 BO"
         file: "03_ai_ml_methods/autonomous_experiment/knowledge_injected_bo.md"
-    modalities: [xrf_microscopy, tomography, spectroscopy]
+      - id: foundation_models_beamline
+        name: "빔라인용 파운데이션 모델"
+        file: "03_ai_ml_methods/autonomous_experiment/foundation_models_beamline.md"
+    modalities: [xrf_microscopy, tomography, spectroscopy, ptychography]
 
   - id: multimodal_integration
     name: "다중모달 통합"

@@ -1,0 +1,145 @@
+/* eBERlight Explorer — Component Styles
+   Design tokens from docs/02_design/design_system.md (DS-001)
+   Ref: ADR-005 */
+
+/* === Header === */
+.eberlight-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #E0E0E0;
+    margin-bottom: 24px;
+}
+.eberlight-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.eberlight-header-logo {
+    width: 40px;
+    height: 40px;
+    background: #0033A0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+}
+.eberlight-header-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0033A0;
+}
+.eberlight-header-nav {
+    display: flex;
+    gap: 16px;
+}
+.eberlight-header-nav a {
+    text-decoration: none;
+    color: #555555;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* === Breadcrumb === */
+.eberlight-breadcrumb {
+    font-size: 14px;
+    color: #555555;
+    padding: 8px 0;
+    margin-bottom: 16px;
+}
+.eberlight-breadcrumb a {
+    color: #0033A0;
+    text-decoration: none;
+}
+.eberlight-breadcrumb a:hover {
+    text-decoration: underline;
+}
+.eberlight-breadcrumb .current {
+    color: #1A1A1A;
+    font-weight: 600;
+}
+.eberlight-breadcrumb .separator {
+    margin: 0 8px;
+    color: #E0E0E0;
+}
+
+/* === Footer === */
+.eberlight-footer {
+    background: #0033A0;
+    color: white;
+    padding: 32px 24px;
+    margin-top: 48px;
+    border-radius: 8px;
+    text-align: center;
+}
+.eberlight-footer p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.eberlight-footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 12px;
+}
+.eberlight-footer-links a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 13px;
+}
+.eberlight-footer-links a:hover {
+    color: white;
+    text-decoration: underline;
+}
+.eberlight-footer-updated {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* === Card === */
+.eberlight-card {
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 24px;
+    transition: box-shadow 0.2s;
+}
+.eberlight-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.eberlight-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1A1A1A;
+}
+.eberlight-card p {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.5;
+}
+
+/* === Tag === */
+.eberlight-tag {
+    display: inline-block;
+    background: #F5F5F5;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    padding: 2px 10px;
+    font-size: 12px;
+    color: #555555;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}

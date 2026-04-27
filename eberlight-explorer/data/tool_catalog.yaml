@@ -100,6 +100,48 @@ tools:
     modalities: [tomography, xrf_microscopy, ptychography]
     tags: [platform, ML, collaborative, web-based]
 
+  - id: httomo
+    name: "HTTomo"
+    icon: "🚀"
+    category: "GPU 파이프라인"
+    pipeline_stage: processing
+    language: "Python / CUDA"
+    gpu: true
+    maturity: "Production"
+    dir: "05_tools_and_code/httomo"
+    files:
+      readme: "05_tools_and_code/httomo/README.md"
+    modalities: [tomography]
+    tags: [GPU, pipeline, high-throughput, YAML, modular]
+
+  - id: tike
+    name: "Tike"
+    icon: "🔬"
+    category: "타이코그래피 재구성"
+    pipeline_stage: processing
+    language: "Python / CUDA"
+    gpu: true
+    maturity: "Production"
+    dir: "05_tools_and_code/tike"
+    files:
+      readme: "05_tools_and_code/tike/README.md"
+    modalities: [ptychography]
+    tags: [GPU, ptychography, ePIE, DM, real-time]
+
+  - id: pyxrf
+    name: "PyXRF"
+    icon: "📊"
+    category: "XRF 분석"
+    pipeline_stage: processing
+    language: "Python"
+    gpu: false
+    maturity: "Production"
+    dir: "05_tools_and_code/pyxrf"
+    files:
+      readme: "05_tools_and_code/pyxrf/README.md"
+    modalities: [xrf_microscopy]
+    tags: [XRF, spectral-fitting, GUI, elemental-mapping]
+
   - id: aps_github_repos
     name: "APS GitHub Repos"
     icon: "🐙"

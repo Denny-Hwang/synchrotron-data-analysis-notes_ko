@@ -1,0 +1,77 @@
+name: Build and deploy eBERlight Explorer to GitHub Pages
+
+# Mirrors the Streamlit explorer (`explorer/`) as a static site on every push
+# to main.  The generator (`scripts/build_static_site.py`) reuses the IA and
+# note parser from `explorer/lib/` so Streamlit and Pages can't drift.
+#
+# Ref: ADR-007 — Static site mirror for GitHub Pages.
+# Ref: docs/03_implementation/github_pages_sync.md — sync contract.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'explorer/**'
+      - '01_program_overview/**'
+      - '02_xray_modalities/**'
+      - '03_ai_ml_methods/**'
+      - '04_publications/**'
+      - '05_tools_and_code/**'
+      - '06_data_structures/**'
+      - '07_data_pipeline/**'
+      - '08_references/**'
+      - '09_noise_catalog/**'
+      - 'scripts/build_static_site.py'
+      - 'scripts/requirements.txt'
+      - 'docs/02_design/wireframes/html/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r scripts/requirements.txt
+
+      - name: Build static site
+        run: python scripts/build_static_site.py --out site
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

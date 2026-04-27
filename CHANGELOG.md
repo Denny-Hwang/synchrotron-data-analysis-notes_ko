@@ -2,6 +2,51 @@
 
 이 프로젝트의 주요 변경 사항을 이 파일에 기록합니다.
 
+이 프로젝트는 ADR-006에 따라 두 개의 독립적인 SemVer 스트림을 사용합니다:
+- `notes-vX.Y.Z` — 노트 폴더의 콘텐츠
+- `explorer-vX.Y.Z` — Explorer 애플리케이션
+
+## [explorer-0.3.0] - 2026-04-21
+
+### 추가
+- Streamlit Explorer를 GitHub Pages용 정적 HTML 사이트로 미러링 (ADR-007)
+- `scripts/build_static_site.py` — `explorer/lib/ia.py`, `explorer/lib/notes.py`, `explorer/assets/styles.css`를 재사용해 Streamlit 앱과 1:1 대응되는 정적 사이트 생성기
+- `.github/workflows/pages.yml` — `main`에 푸시될 때마다 노트, `explorer/**`, 생성기, 와이어프레임, 워크플로우의 변경을 감지해 자동 재빌드 및 배포
+- `docs/03_implementation/github_pages_sync.md` (IMPL-002) — Streamlit과 Pages 간 동기화 계약 명세
+- `CLAUDE.md` 불변조건 #9 — Pages는 Streamlit Explorer를 미러링해야 함
+- 노트 폴더 이미지(`09_noise_catalog/images/*` 등)도 함께 복사되어 정적 사이트에서 마크다운 이미지 참조가 정상 작동
+- `.nojekyll`, `404.html`, 재생성된 `wireframes/index.html` 게시
+
+### 변경
+- `.github/workflows/pages.yml`: 이전에는 3개 와이어프레임만 게시했으나, 이제 전체 Explorer 미러와 와이어프레임을 함께 빌드/배포
+- `CLAUDE.md` 디렉토리 맵에 `scripts/` 추가
+
+### 비고
+- 생성된 `site/` 디렉토리는 git-ignore 처리되며 직접 커밋하거나 수동 편집 금지
+
+## [explorer-0.2.0] - 2026-04-08
+
+### 추가
+- ADR-004에 따른 3-클러스터 정보 아키텍처 매핑 (9개 폴더 → 3개 클러스터)
+- YAML frontmatter 파서와 우아한 성능 저하(graceful degradation) 노트 로더 (ADR-002, ADR-003)
+- 클러스터/모달리티/빔라인용 통제 어휘(controlled vocabulary) 검증 (DC-001)
+- 클러스터 랜딩 페이지: Discover, Explore, Build
+- DS-001에 준한 Card 및 Note view 컴포넌트
+- 히어로 + 3개 클러스터 카드로 랜딩 페이지 갱신 (FR-001)
+- 12개 신규 테스트 (IA 매핑 + 노트 파서) 추가, 총 16개 통과
+
+## [explorer-0.1.0] - 2026-04-08
+
+### 추가
+- ANL 디자인 토큰을 반영한 Streamlit 테마 (ADR-005)
+- 로고 플레이스홀더와 상단 내비게이션 스텁이 있는 Header 컴포넌트
+- IA-001 내비게이션 규칙에 따른 Breadcrumb 컴포넌트
+- 계약번호 DE-AC02-06CH11357을 명시한 DOE 감사 표기 푸터
+- Header / Breadcrumb / Footer / Card / Tag 컴포넌트용 커스텀 CSS
+- 플레이스홀더 랜딩 페이지 ("Hello, eBERlight")
+- 3개 컴포넌트 모두에 대한 스모크 테스트
+- 전체 문서 세트: CLAUDE.md, 제품 레이어, 디자인 레이어, 6개 ADR, 구현 문서, 테스트 계획, 용어집, 기여 가이드
+
 ## [1.3.0] - 2026-03-22
 
 ### 추가

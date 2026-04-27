@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eBERlight Explorer — Tool Page Wireframe v0.1</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-primary: #0033A0;
+      --color-secondary: #00A3E0;
+      --color-accent: #F47B20;
+      --color-surface: #F5F5F5;
+      --color-surface-alt: #FFFFFF;
+      --color-text: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-border: #E0E0E0;
+      --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+      --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    body { font-family: var(--font-body); color: var(--color-text); background: var(--color-surface); line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+
+    /* Header */
+    .header { background: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); padding: 16px 0; }
+    .header .container { display: flex; align-items: center; justify-content: space-between; }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .header-logo { width: 40px; height: 40px; background: var(--color-primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px; }
+    .header-title { font-size: 22px; font-weight: 700; color: var(--color-primary); }
+    .header-nav { display: flex; gap: 24px; }
+    .header-nav a { text-decoration: none; color: var(--color-text-secondary); font-weight: 600; font-size: 15px; padding: 8px 16px; border-radius: 8px; }
+    .header-nav a:hover { background: var(--color-surface); color: var(--color-primary); }
+    .header-nav a.active { color: var(--color-accent); border-bottom: 2px solid var(--color-accent); border-radius: 0; }
+
+    /* Nav Bar */
+    .nav-bar { background: var(--color-surface-alt); border-bottom: 1px solid var(--color-border); padding: 12px 0; }
+    .breadcrumb { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 8px; }
+    .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb .current { color: var(--color-text); font-weight: 600; }
+    .zoom-indicator { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-secondary); }
+    .zoom-step { display: flex; align-items: center; gap: 4px; }
+    .zoom-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-border); }
+    .zoom-dot.active { background: var(--color-primary); border-color: var(--color-primary); }
+    .zoom-dot.completed { background: var(--color-text-secondary); border-color: var(--color-text-secondary); }
+    .zoom-line { width: 24px; height: 2px; background: var(--color-border); }
+
+    /* Summary Card */
+    .summary-card { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: 8px; padding: 32px; margin: 32px 0 24px; border-top: 4px solid var(--color-accent); }
+    .summary-card h1 { font-size: 36px; margin-bottom: 8px; }
+    .summary-card .description { font-size: 16px; color: var(--color-text-secondary); margin-bottom: 16px; }
+    .summary-card .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; padding: 4px 12px; font-size: 13px; color: var(--color-text-secondary); }
+    .beamline-badges { display: flex; align-items: center; gap: 8px; }
+    .beamline-badges span { font-size: 13px; color: var(--color-text-secondary); font-weight: 600; }
+    .badge { background: var(--color-primary); color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+
+    /* Content + Panel Layout */
+    .detail-layout { display: flex; gap: 32px; padding-bottom: 48px; }
+    .detail-main { flex: 1; min-width: 0; }
+    .detail-panel { width: 280px; flex-shrink: 0; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--color-border); margin-bottom: 24px; }
+    .tab { padding: 12px 24px; font-size: 15px; font-weight: 600; color: var(--color-text-secondary); cursor: pointer; border: none; background: none; font-family: var(--font-body); border-bottom: 2px solid transparent; margin-bottom: -2px; }
+    .tab:hover { color: var(--color-text); }
+    .tab.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+    /* Tab Content */
+    .tab-content { line-height: 1.8; }
+    .tab-content h2 { font-size: 22px; margin: 24px 0 12px; color: var(--color-text); }
+    .tab-content h3 { font-size: 18px; margin: 20px 0 8px; }
+    .tab-content p { margin-bottom: 16px; }
+    .tab-content ul { margin: 0 0 16px 24px; }
+    .tab-content li { margin-bottom: 4px; }
+
+    /* Code Block */
+    .code-block { background: var(--color-text); color: #E0E0E0; border-radius: 8px; padding: 20px; margin: 16px 0; font-family: var(--font-code); font-size: 14px; line-height: 1.5; overflow-x: auto; position: relative; }
+    .code-lang { position: absolute; top: 8px; right: 12px; font-size: 11px; color: #888; text-transform: uppercase; }
+    .code-kw { color: #82AAFF; }
+    .code-str { color: #C3E88D; }
+    .code-comment { color: #676E95; }
+
+    /* Metadata Panel */
+    .meta-panel { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: 8px; padding: 24px; position: sticky; top: 80px; }
+    .meta-section { margin-bottom: 20px; }
+    .meta-section:last-child { margin-bottom: 0; }
+    .meta-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-secondary); margin-bottom: 8px; }
+    .meta-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .meta-link { display: block; color: var(--color-primary); text-decoration: none; font-size: 14px; margin-bottom: 4px; }
+    .meta-link:hover { text-decoration: underline; }
+
+    /* Footer */
+    .footer { background: var(--color-primary); color: white; padding: 32px 0; }
+    .footer .container { text-align: center; }
+    .footer p { font-size: 13px; line-height: 1.6; margin-bottom: 12px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; }
+    .footer-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; }
+
+    @media (max-width: 767px) {
+      .container { padding: 0 16px; }
+      .detail-layout { flex-direction: column; }
+      .detail-panel { width: 100%; }
+      .meta-panel { position: static; }
+      .summary-card h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header-brand">
+        <div class="header-logo">eB</div>
+        <span class="header-title">eBERlight Explorer</span>
+      </div>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#">Discover</a>
+        <a href="#">Explore</a>
+        <a href="#" class="active">Build</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="nav-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="#">Home</a> &gt; <a href="#">Build and Compute</a> &gt; <a href="#">Tools</a> &gt; <span class="current">TomocuPy</span>
+      </nav>
+      <div class="zoom-indicator" role="progressbar" aria-valuenow="4" aria-valuemin="1" aria-valuemax="4" aria-valuetext="Level 4 of 4: Source">
+        <span class="zoom-step"><span class="zoom-dot completed"></span> Map</span>
+        <span class="zoom-line"></span>
+        <span class="zoom-step"><span class="zoom-dot completed"></span> Section</span>
+        <span class="zoom-line"></span>
+        <span class="zoom-step"><span class="zoom-dot completed"></span> Topic</span>
+        <span class="zoom-line"></span>
+        <span class="zoom-step"><span class="zoom-dot active"></span> Source</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="summary-card">
+      <h1>TomocuPy</h1>
+      <p class="description">GPU-accelerated tomographic reconstruction using CuPy and CUDA for real-time processing at APS beamlines.</p>
+      <div class="tags">
+        <span class="tag">tomography</span>
+        <span class="tag">GPU</span>
+        <span class="tag">reconstruction</span>
+        <span class="tag">CUDA</span>
+        <span class="tag">CuPy</span>
+      </div>
+      <div class="beamline-badges">
+        <span>Used at:</span>
+        <span class="badge">2-BM</span>
+        <span class="badge">7-BM</span>
+        <span class="badge">32-ID</span>
+      </div>
+    </div>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <div class="tabs">
+          <button class="tab active">Overview</button>
+          <button class="tab">Code</button>
+          <button class="tab">Run</button>
+          <button class="tab">Citation</button>
+        </div>
+        <div class="tab-content">
+          <h2>Architecture</h2>
+          <p>TomocuPy is a GPU-accelerated tomographic reconstruction package built on CuPy. It replaces CPU-bound NumPy operations with GPU kernels, achieving 100–300× speedup on NVIDIA A100 GPUs.</p>
+          <p>Key architectural components:</p>
+          <ul>
+            <li><strong>Preprocessing pipeline</strong> — flat-field correction, ring removal, phase retrieval</li>
+            <li><strong>Reconstruction engine</strong> — filtered back-projection (FBP) and gridrec algorithms</li>
+            <li><strong>Memory manager</strong> — chunk-based processing for datasets exceeding GPU memory</li>
+            <li><strong>CLI interface</strong> — drop-in replacement for TomoPy CLI</li>
+          </ul>
+
+          <h2>Pros / Cons</h2>
+          <h3>Advantages</h3>
+          <ul>
+            <li>100–300× faster than TomoPy for FBP reconstruction</li>
+            <li>Drop-in replacement: same CLI and data format</li>
+            <li>Supports Data Exchange HDF5 format natively</li>
+          </ul>
+          <h3>Trade-offs</h3>
+          <ul>
+            <li>Requires NVIDIA GPU with CUDA 11.2+</li>
+            <li>Fewer reconstruction algorithms than TomoPy</li>
+            <li>CuPy dependency adds installation complexity</li>
+          </ul>
+
+          <h2>Code Example</h2>
+          <div class="code-block">
+            <span class="code-lang">Python</span>
+<span class="code-kw">import</span> tomocupy
+
+<span class="code-comment"># Load a Data Exchange HDF5 file</span>
+data = tomocupy.read_hdf5(<span class="code-str">"/data/sample.h5"</span>)
+
+<span class="code-comment"># Reconstruct with FBP on GPU</span>
+recon = tomocupy.recon(
+    data,
+    algorithm=<span class="code-str">"fbp"</span>,
+    center=<span class="code-str">1024.5</span>,
+    gpu_id=<span class="code-str">0</span>,
+)
+          </div>
+        </div>
+      </div>
+      <aside class="detail-panel" aria-label="Note metadata">
+        <div class="meta-panel">
+          <div class="meta-section">
+            <div class="meta-label">Beamlines</div>
+            <div class="meta-badges">
+              <span class="badge">2-BM</span>
+              <span class="badge">7-BM</span>
+              <span class="badge">32-ID</span>
+            </div>
+          </div>
+          <div class="meta-section">
+            <div class="meta-label">Modality</div>
+            <div class="meta-badges">
+              <span class="tag">Tomography</span>
+            </div>
+          </div>
+          <div class="meta-section">
+            <div class="meta-label">Related Tools</div>
+            <a href="#" class="meta-link">TomoPy</a>
+            <a href="#" class="meta-link">HTTomo</a>
+          </div>
+          <div class="meta-section">
+            <div class="meta-label">Publications</div>
+            <a href="#" class="meta-link">TomocuPy GPU Reconstruction (2022)</a>
+            <a href="#" class="meta-link">Full-Stack DL Tomo (2023)</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>This research used resources of the Advanced Photon Source, a U.S. Department of Energy (DOE) Office of Science user facility operated for the DOE Office of Science by Argonne National Laboratory under Contract No. DE-AC02-06CH11357.</p>
+      <div class="footer-links">
+        <a href="https://www.aps.anl.gov/">APS</a>
+        <a href="https://eberlight.aps.anl.gov/">eBERlight</a>
+        <a href="https://github.com/Denny-Hwang/synchrotron-data-analysis-notes">Repository</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
