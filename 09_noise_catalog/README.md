@@ -1,6 +1,6 @@
 # 노이즈 및 아티팩트 카탈로그
 
-싱크로트론 X선 데이터 분석에서 발생하는 **29종 노이즈 및 아티팩트 유형**의 실용적 카탈로그입니다. 각 항목에는 탐지 코드, 보정 방법, 보정 전후 예시, 그리고 이 저장소의 심화 자료 링크가 포함되어 있습니다.
+싱크로트론 X선 데이터 분석에서 발생하는 **47종 노이즈 및 아티팩트 유형**의 실용적 카탈로그입니다. 7개 도메인(토모그래피, XRF 현미경, 분광학, 타이코그래피, 의료영상, 전자현미경, 산란/회절, 교차 분야)에 걸쳐 탐지 코드, 보정 방법, 보정 전후 예시, 그리고 이 저장소의 심화 자료 링크가 포함되어 있습니다.
 
 ## 카탈로그 사용법
 
@@ -28,7 +28,10 @@
 │   ├── XRF 현미경 (8종)
 │   ├── 분광학 (6종)
 │   ├── 타이코그래피 (3종)
-│   └── 공통 (3종)
+│   ├── 의료영상 (7종) — 의학 CT/MR에서 차용한 교차 도메인 통찰
+│   ├── 전자현미경 (5종) — TEM/SEM에서 차용한 교차 도메인 통찰
+│   ├── 산란/회절 (5종) — 결정학·SAXS·SANS 패턴 아티팩트
+│   └── 공통 (6종)
 │
 ├── 노이즈 유형별 (각 문서의 속성)
 │   ├── 통계적 — 광자 계수, 포아송, 열잡음
@@ -79,6 +82,26 @@
 | 27 | [DL 환각](cross_cutting/dl_hallucination.md) | 공통 | 계산적 | 심각 | 간헐적 | 불확실성 정량화, 잔차 분석 |
 | 28 | [리청킹 데이터 무결성](cross_cutting/rechunking_data_integrity.md) | 공통 | 계산적 | 주요 | 간헐적 | 리청킹 후 체크섬 검증 |
 | 29 | [검출기 공통 문제](cross_cutting/detector_common_issues.md) | 공통 | 기기적 | 주요 | 흔함 | 정기적 검출기 교정 |
+| 30 | [잔광/지속성](cross_cutting/afterglow_persistence.md) | 공통 | 기기적 | 주요 | 간헐적 | 검출기 휴식 시간 확보, 잔광 모델 차감 |
+| 31 | [우주선 이상값](cross_cutting/cosmic_ray_outlier.md) | 공통 | 통계적 | 경미 | 항상 | 메디안/이상값 탐지 후 보간 |
+| 32 | [노이즈 추정 방법](cross_cutting/noise_estimation_methods.md) | 공통 | 분석 가이드 | — | — | PCA, 웨이블릿, 베이지안 노이즈 모델 |
+| 33 | [빔 경화](medical_imaging/beam_hardening.md) | 의료 | 체계적 | 주요 | 흔함 | 다색 보정 / 듀얼 에너지 |
+| 34 | [편향 필드](medical_imaging/bias_field.md) | 의료 | 기기적 | 주요 | 흔함 | N4 정규화 / 다항식 피팅 |
+| 35 | [깁스 링잉](medical_imaging/gibbs_ringing.md) | 의료 | 계산적 | 경미 | 흔함 | 윈도우 함수 / 부분 푸리에 |
+| 36 | [금속 아티팩트](medical_imaging/metal_artifact.md) | 의료 | 체계적 | 심각 | 간헐적 | NMAR / DL 금속 아티팩트 저감 |
+| 37 | [부분 체적 효과](medical_imaging/partial_volume_effect.md) | 의료 | 계산적 | 주요 | 항상 | 보다 미세한 복셀 또는 PVE 보정 |
+| 38 | [산란 아티팩트](medical_imaging/scatter_artifact.md) | 의료 | 체계적 | 주요 | 흔함 | 콜리메이터 / 산란 추정 |
+| 39 | [절단 아티팩트](medical_imaging/truncation_artifact.md) | 의료 | 계산적 | 주요 | 간헐적 | 시야(FOV) 외삽 |
+| 40 | [충전 아티팩트](electron_microscopy/charging_artifact.md) | 전자현미경 | 기기적 | 심각 | 흔함 | 전도성 코팅 / 환경 SEM |
+| 41 | [오염 축적](electron_microscopy/contamination_buildup.md) | 전자현미경 | 시료 | 주요 | 흔함 | 플라즈마 클리너 / 빔 셔터링 |
+| 42 | [CTF 아티팩트](electron_microscopy/ctf_artifact.md) | 전자현미경 | 광학적 | 주요 | 항상 | CTF 추정 및 보정 |
+| 43 | [드리프트/진동](electron_microscopy/drift_vibration.md) | 전자현미경 | 기기적 | 심각 | 간헐적 | 모션 보상 정합 |
+| 44 | [저선량 샷 노이즈](electron_microscopy/shot_noise_low_dose.md) | 전자현미경 | 통계적 | 주요 | 항상 | Noise2Void / 평균화 |
+| 45 | [검출기 갭/시차](scattering_diffraction/detector_gaps_parallax.md) | 산란/회절 | 기기적 | 주요 | 흔함 | 멀티 모듈 정합, 시차 보정 |
+| 46 | [얼음 링](scattering_diffraction/ice_rings.md) | 산란/회절 | 시료 | 주요 | 흔함 | 결빙 방지 / 얼음 링 마스킹 |
+| 47 | [기생 산란](scattering_diffraction/parasitic_scattering.md) | 산란/회절 | 기기적 | 주요 | 항상 | 빔스토프 / 가드 슬릿 |
+| 48 | [위상 랩핑](scattering_diffraction/phase_wrapping.md) | 산란/회절 | 계산적 | 주요 | 간헐적 | 언랩핑 알고리즘 |
+| 49 | [방사선 손상(결정학)](scattering_diffraction/radiation_damage_crystallography.md) | 산란/회절 | 시료 | 심각 | 흔함 | 다중 결정 / 헬리컬 스캐닝 |
 
 ## 디렉토리 구성
 
@@ -120,10 +143,34 @@
 ├── cross_cutting/
 │   ├── dl_hallucination.md
 │   ├── rechunking_data_integrity.md
-│   └── detector_common_issues.md
+│   ├── detector_common_issues.md
+│   ├── afterglow_persistence.md
+│   ├── cosmic_ray_outlier.md
+│   └── noise_estimation_methods.md
+├── medical_imaging/                   # 의료영상 도메인 교차 통찰
+│   ├── beam_hardening.md
+│   ├── bias_field.md
+│   ├── gibbs_ringing.md
+│   ├── metal_artifact.md
+│   ├── partial_volume_effect.md
+│   ├── scatter_artifact.md
+│   └── truncation_artifact.md
+├── electron_microscopy/               # 전자현미경 도메인 교차 통찰
+│   ├── charging_artifact.md
+│   ├── contamination_buildup.md
+│   ├── ctf_artifact.md
+│   ├── drift_vibration.md
+│   └── shot_noise_low_dose.md
+├── scattering_diffraction/            # 산란/회절 패턴 아티팩트
+│   ├── detector_gaps_parallax.md
+│   ├── ice_rings.md
+│   ├── parasitic_scattering.md
+│   ├── phase_wrapping.md
+│   └── radiation_damage_crystallography.md
 └── images/
     ├── README.md                      # 이미지 출처 및 라이선스 정보
-    └── generate_examples.py           # 합성 예시 생성 스크립트
+    ├── generate_examples.py           # 합성 예시 생성 스크립트
+    └── generate_cross_domain_examples.py  # 교차 도메인 예시 생성 스크립트
 ```
 
 ## 관련 섹션

@@ -41,3 +41,5 @@ APS-U 이후 자율 실험을 촉진하는 과제들:
 | [roi_finder.md](roi_finder.md) | XRF를 위한 ML 기반 ROI 선택 |
 | [bayesian_optimization.md](bayesian_optimization.md) | 베이지안 매개변수 최적화 |
 | [ai_nerd.md](ai_nerd.md) | 비지도 동역학 핑거프린팅 |
+| [knowledge_injected_bo.md](knowledge_injected_bo.md) | XANES용 지식 주입 베이지안 최적화(KI-BO) |
+| [foundation_models_beamline.md](foundation_models_beamline.md) | 빔라인 제어를 위한 파운데이션 모델 |

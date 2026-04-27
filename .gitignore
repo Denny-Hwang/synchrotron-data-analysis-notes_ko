@@ -1,0 +1,4 @@
+**/__pycache__/
+
+# Generated static site output (produced by scripts/build_static_site.py)
+/site/

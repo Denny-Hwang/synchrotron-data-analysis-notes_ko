@@ -34,4 +34,5 @@
 |------|---------|
 | [tomogan.md](tomogan.md) | 토모그래피를 위한 GAN 기반 노이즈 제거 |
 | [noise2noise.md](noise2noise.md) | 깨끗한 목표 없는 자기 지도 노이즈 제거 |
+| [noise2void.md](noise2void.md) | 단일 노이즈 이미지 기반 블라인드 스팟 자기 지도 학습 |
 | [deep_residual_xrf.md](deep_residual_xrf.md) | 프로브 역합성곱(Deconvolution)을 통한 해상도 향상 |

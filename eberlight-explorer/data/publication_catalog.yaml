@@ -166,3 +166,63 @@ publications:
     modalities: [crystallography]
     tags: [AlphaFold, protein, structure-prediction]
     priority: "Medium"
+
+  - id: review_noise2void_2019
+    title: "Noise2Void — 단일 노이즈 이미지로부터의 학습 기반 노이즈 제거"
+    authors: "Krull, A.; Buchholz, T.-O.; Jost, F."
+    year: 2019
+    journal: "CVPR 2019"
+    doi: "10.1109/CVPR.2019.00223"
+    file: "04_publications/ai_ml_synchrotron/review_noise2void_2019.md"
+    category: denoising
+    modalities: [tomography, xrf_microscopy, ptychography]
+    tags: [self-supervised, denoising, blind-spot, single-image]
+    priority: "High"
+
+  - id: review_diffusion_ct_2024
+    title: "스코어 기반 확산 모델을 이용한 CT 이미지 재구성"
+    authors: "Song, Y.; Shen, L.; Xing, L.; Ermon, S."
+    year: 2024
+    journal: "Medical Image Analysis"
+    doi: "10.1016/j.media.2024.103131"
+    file: "04_publications/ai_ml_synchrotron/review_diffusion_ct_2024.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [diffusion-model, sparse-view, limited-angle, generative]
+    priority: "High"
+
+  - id: review_httomo_2024
+    title: "HTTomo — 고처리량 토모그래피 파이프라인"
+    authors: "Sherrell, D. et al."
+    year: 2024
+    journal: "J. Synchrotron Rad."
+    doi: "10.1107/S1600577524005095"
+    file: "04_publications/ai_ml_synchrotron/review_httomo_2024.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [pipeline, GPU, high-throughput, modular]
+    priority: "High"
+
+  - id: review_multimodal_synchrotron_data_2025
+    title: "ML 응용을 위한 3차원 다중모달 싱크로트론 데이터"
+    authors: "Hoidn, O. et al."
+    year: 2025
+    journal: "Nature Scientific Data"
+    doi: "10.1038/s41597-025-04605-9"
+    file: "04_publications/ai_ml_synchrotron/review_multimodal_synchrotron_data_2025.md"
+    category: multimodal_integration
+    modalities: [tomography, xrf_microscopy, ptychography]
+    tags: [benchmark, dataset, multimodal, ML, open-data]
+    priority: "High"
+
+  - id: review_hallucination_tomo_2021
+    title: "토모그래피 이미지 재구성에서의 환각(Hallucination)에 관하여"
+    authors: "Bhadra, S.; Kelkar, V. A.; Brooks, F. J.; Anastasio, M. A."
+    year: 2021
+    journal: "IEEE Trans. Med. Imaging"
+    doi: "10.1109/TMI.2021.3077857"
+    file: "04_publications/ai_ml_synchrotron/review_hallucination_tomo_2021.md"
+    category: reconstruction
+    modalities: [tomography]
+    tags: [hallucination, deep-learning, safety, sFRC]
+    priority: "High"

@@ -24,6 +24,7 @@ Photon Source (APS)의 APS BER 프로그램과의 관련성에 대한 명시적 
 | 리뷰 | 논문 | 주요 기여 |
 |------|------|-----------|
 | `review_tomogan_2020.md` | Liu et al., JOSA A (2020) | 방사광 토모그래피를 위한 GAN 기반 노이즈 제거; 4-10배 선량 감소 |
+| `review_noise2void_2019.md` | Krull et al., CVPR (2019) | 단일 노이즈 이미지로부터의 블라인드 스팟 자기 지도 노이즈 제거 |
 | `review_realtime_uct_hpc_2020.md` | McClure et al., SMC (2020) | 마이크로-CT를 위한 노이즈 제거를 포함한 엔드투엔드 AI+HPC 워크플로우 |
 
 ### 분할 및 클러스터링
@@ -45,6 +46,9 @@ AI 기반 접근법.
 | `review_ai_edge_ptychography_2023.md` | Babu et al., Nature Comm. (2023) | 엣지 GPU/FPGA에서 2 kHz 실시간 스트리밍 타이코그래피 |
 | `review_fullstack_dl_tomo_2023.md` | Zhang et al., The Innovation (2023) | 방사광 토모그래피 파이프라인을 위한 풀스택 DL 비전 |
 | `review_ptychonet_2019.md` | Guan et al. (2019) | 반복적 방법 대비 90% 속도 향상의 CNN 위상 복원 |
+| `review_diffusion_ct_2024.md` | Song et al., Med. Image Anal. (2024) | 희소·제한 각도 CT를 위한 스코어 기반 확산 모델 |
+| `review_httomo_2024.md` | Sherrell et al., J. Synchrotron Rad. (2024) | 모듈식 GPU 고처리량 토모그래피 파이프라인 |
+| `review_hallucination_tomo_2021.md` | Bhadra et al., IEEE Trans. Med. Imaging (2021) | 딥러닝 토모그래피 재구성의 환각(hallucination) 분석 및 sFRC |
 
 ### 자율 및 적응형 실험
 
@@ -85,6 +89,7 @@ AI 기반 접근법.
 | `review_fullstack_dl_tomo_2023.md` | The Innovation (2023) | 토모그래피 전 단계에 걸친 포괄적 파이프라인 비전 |
 | `review_realtime_uct_hpc_2020.md` | McClure et al., SMC (2020) | 실시간 마이크로-CT 분석을 위한 풀 파이프라인 통합 |
 | `review_ai_als_workshop_2024.md` | Synchrotron Rad. News (2024) | AI@ALS 워크숍: APS에 적용 가능한 시설 전체 ML 수요 조사 |
+| `review_multimodal_synchrotron_data_2025.md` | Hoidn et al., Nat. Sci. Data (2025) | ML 응용을 위한 3차원 다중 모달 싱크로트론 데이터셋 |
 
 ---
 
@@ -94,18 +99,23 @@ AI 기반 접근법.
 |---|------|---------|------|----------|
 | 1 | `review_xrf_gmm_2013.md` | Ward | 2013 | XRF |
 | 2 | `review_ptychonet_2019.md` | Guan | 2019 | 타이코그래피 |
-| 3 | `review_tomogan_2020.md` | Liu | 2020 | 토모그래피 |
-| 4 | `review_realtime_uct_hpc_2020.md` | McClure | 2020 | 마이크로-CT |
-| 5 | `review_alphafold_2021.md` | Jumper | 2021 | 결정학 |
-| 6 | `review_roi_finder_2022.md` | Chowdhury | 2022 | XRF |
-| 7 | `review_aiedge_ptycho_2023.md` | Babu | 2023 | 타이코그래피 |
-| 8 | `review_ai_edge_ptychography_2023.md` | Babu | 2023 | 타이코그래피 |
-| 9 | `review_fullstack_dl_tomo_2023.md` | Zhang | 2023 | 토모그래피 |
-| 10 | `review_fullstack_tomo_2023.md` | Zhang | 2023 | 토모그래피 |
-| 11 | `review_deep_residual_xrf_2023.md` | Wu | 2023 | XRF |
-| 12 | `review_ai_nerd_2024.md` | Horwath | 2024 | XPCS |
-| 13 | `review_ai_als_workshop_2024.md` | Parkinson | 2024 | 다중 모달 |
-| 14 | `review_aidriven_xanes_2025.md` | Du | 2025 | 분광학 |
+| 3 | `review_noise2void_2019.md` | Krull | 2019 | 일반 (도메인 전이) |
+| 4 | `review_tomogan_2020.md` | Liu | 2020 | 토모그래피 |
+| 5 | `review_realtime_uct_hpc_2020.md` | McClure | 2020 | 마이크로-CT |
+| 6 | `review_alphafold_2021.md` | Jumper | 2021 | 결정학 |
+| 7 | `review_hallucination_tomo_2021.md` | Bhadra | 2021 | 토모그래피 |
+| 8 | `review_roi_finder_2022.md` | Chowdhury | 2022 | XRF |
+| 9 | `review_aiedge_ptycho_2023.md` | Babu | 2023 | 타이코그래피 |
+| 10 | `review_ai_edge_ptychography_2023.md` | Babu | 2023 | 타이코그래피 |
+| 11 | `review_fullstack_dl_tomo_2023.md` | Zhang | 2023 | 토모그래피 |
+| 12 | `review_fullstack_tomo_2023.md` | Zhang | 2023 | 토모그래피 |
+| 13 | `review_deep_residual_xrf_2023.md` | Wu | 2023 | XRF |
+| 14 | `review_ai_nerd_2024.md` | Horwath | 2024 | XPCS |
+| 15 | `review_ai_als_workshop_2024.md` | Parkinson | 2024 | 다중 모달 |
+| 16 | `review_diffusion_ct_2024.md` | Song | 2024 | 토모그래피 |
+| 17 | `review_httomo_2024.md` | Sherrell | 2024 | 토모그래피 |
+| 18 | `review_aidriven_xanes_2025.md` | Du | 2025 | 분광학 |
+| 19 | `review_multimodal_synchrotron_data_2025.md` | Hoidn | 2025 | 다중 모달 |
 
 ---
 
@@ -151,4 +161,4 @@ AI 기반 접근법.
 
 ---
 
-_최종 업데이트: 2026-Q1_
+_최종 업데이트: 2026-Q2_

@@ -33,7 +33,10 @@
 | **ROI-Finder** | XRF | Python | 아니오 | 연구 단계 | 낮음 |
 | **TomocuPy** | 토모그래피 | Python/CuPy | 예 | 프로덕션 | 높음 |
 | **TomoPy** | 토모그래피 | Python/C | 아니오 | 프로덕션 | 높음 |
+| **HTTomo** | 토모그래피 | Python/CUDA | 예 | 프로덕션 | 높음 |
+| **Tike** | 타이코그래피 | Python/CUDA | 예 | 프로덕션 | 높음 |
 | **MAPS** | XRF | IDL/C++ | 아니오 | 프로덕션 | 중간 |
+| **PyXRF** | XRF | Python | 아니오 | 프로덕션 | 높음 |
 | **MLExchange** | 다중 | Python | 예 | 개발 중 | 높음 |
 | **Bluesky** | 제어 | Python | 아니오 | 프로덕션 | 높음 |
 | **EPICS** | 제어 | C/Python | 아니오 | 프로덕션 | 높음 |
@@ -45,7 +48,10 @@
 | [roi_finder/](roi_finder/) | ROI-Finder | XRF ROI 선택 (상세 역공학) |
 | [tomocupy/](tomocupy/) | TomocuPy | GPU 가속 토모그래피 재구성 |
 | [tomopy/](tomopy/) | TomoPy | 표준 토모그래피 재구성 |
+| [httomo/](httomo/) | HTTomo | 모듈식 GPU 고처리량 토모그래피 파이프라인 |
+| [tike/](tike/) | Tike | GPU 가속 타이코그래피 재구성(ePIE/DM/LSQ-ML) |
 | [maps_software/](maps_software/) | MAPS | XRF 스펙트럼 분석 |
+| [pyxrf/](pyxrf/) | PyXRF | NSLS-II XRF 스펙트럼 피팅 및 원소 매핑 |
 | [mlexchange/](mlexchange/) | MLExchange | 광원 시설용 ML 플랫폼 |
 | [aps_github_repos/](aps_github_repos/) | APS GitHub | 저장소 카탈로그 |
 | [bluesky_epics/](bluesky_epics/) | Bluesky/EPICS | 실험 오케스트레이션 |
